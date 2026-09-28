@@ -1,0 +1,366 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   VORALIS — sistema de diseño
+
+   Dos temas. El claro es el rostro por defecto de la marca (brief §18:
+   "mantener la identidad actual, fondos limpios"); el oscuro es una opción
+   del visitante, con la paleta derivada del Radar Estratégico real.
+
+   Cómo funciona el theming:
+   Tailwind v4 congela los tokens de `@theme` en tiempo de build, así que los
+   tokens semánticos apuntan a variables de runtime (`--v-*`) que sí cambian
+   con `[data-theme]`. Los componentes usan SOLO los tokens semánticos:
+   `bg-surface`, `text-fg`, `border-line`. Ninguno escribe un color literal.
+=========================================================================== */
+
+@theme {
+  /* --- Tokens semánticos: cambian con el tema ---------------------------- */
+  --color-surface: var(--v-surface);
+  --color-sunken: var(--v-sunken);
+  --color-raised: var(--v-raised);
+  --color-fg: var(--v-fg);
+  --color-fg-soft: var(--v-fg-soft);
+  --color-muted: var(--v-muted);
+  --color-line: var(--v-line);
+  --color-line-soft: var(--v-line-soft);
+  --color-accent: var(--v-accent);
+  --color-accent-hover: var(--v-accent-hover);
+  --color-accent-soft: var(--v-accent-soft);
+  --color-accent-quiet: var(--v-accent-quiet);
+
+  /* --- Superficie de producto: oscura en AMBOS temas ---------------------
+     El panel del hero y los motores representan pantallas reales del
+     producto. Si se aclarasen en tema oscuro perderían esa lectura, así que
+     su paleta es fija y solo se ajustan borde y halo.                      */
+  --color-panel-from: #0f2a55;
+  --color-panel-via: #0a1c3a;
+  --color-panel-to: #070f1f;
+  --color-panel-fg: #f3f7ff;
+  --color-panel-muted: #a9c2e6;
+
+  /* --- Acentos de estado: constantes en los dos temas -------------------- */
+  --color-signal: #2ee6ab;
+  --color-signal-dim: #17b688;
+  --color-signal-deep: #0f6b52;
+  --color-alert: #ffb454;
+  --color-alert-deep: #9a5608;
+
+  /* --- Escala de marca (para superficies siempre oscuras) ---------------- */
+  --color-brand-100: #eaf3ff;
+  --color-brand-200: #cfe3ff;
+  --color-brand-300: #9ec7ff;
+  --color-brand-400: #5f9dff;
+  --color-brand-500: #1768ff;
+  --color-brand-600: #0959ef;
+  --color-brand-700: #0b4bc4;
+
+  /* --- Tipografía -------------------------------------------------------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* Escala apretada al estilo Linear: tracking negativo agresivo en display */
+  --text-display: clamp(2.25rem, 1.5rem + 2.1vw, 3rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.045em;
+
+  --text-title: clamp(1.875rem, 1.35rem + 1.8vw, 2.75rem);
+  --text-title--line-height: 1.08;
+  --text-title--letter-spacing: -0.04em;
+
+  /* --- Elevación --------------------------------------------------------- */
+  --shadow-soft: var(--v-shadow-soft);
+  --shadow-card: var(--v-shadow-card);
+  --shadow-panel: var(--v-shadow-panel);
+  --shadow-brand: var(--v-shadow-brand);
+
+  /* --- Radios y movimiento ----------------------------------------------- */
+  --radius-card: 1rem;
+  --radius-panel: 1.5rem;
+  --duration-ui: 300ms;
+  --ease-ui: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   TEMA CLARO (por defecto)
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --v-surface: #ffffff;
+  --v-sunken: #f7faff;
+  --v-raised: #ffffff;
+  --v-fg: #07192d;
+  --v-fg-soft: #36506d;
+  --v-muted: #5c6f86;
+  --v-line: #dce4ed;
+  --v-line-soft: #eef3f8;
+  --v-accent: #1768ff;
+  --v-accent-hover: #0959ef;
+  --v-accent-soft: #eaf3ff;
+  --v-accent-quiet: #6d9dff;
+
+  --v-shadow-soft: 0 1px 2px rgba(18, 60, 102, 0.04), 0 4px 12px rgba(18, 60, 102, 0.05);
+  --v-shadow-card: 0 2px 4px rgba(18, 60, 102, 0.05), 0 12px 28px rgba(18, 60, 102, 0.09);
+  --v-shadow-panel: 0 25px 55px rgba(19, 67, 114, 0.17);
+  --v-shadow-brand: 0 8px 20px rgba(23, 104, 255, 0.16);
+
+  /* Halo del hero y de los paneles */
+  --v-glow: rgba(152, 202, 255, 0.32);
+  --v-panel-ring: rgba(198, 213, 229, 0.8);
+}
+
+/* ---------------------------------------------------------------------------
+   TEMA OSCURO
+   Paleta tomada del Radar Estratégico: casi negro azulado, acento azul
+   aclarado para conservar contraste y verde señal como único color vivo.
+--------------------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --v-surface: #08090d;
+  --v-sunken: #0b0d14;
+  --v-raised: #101320;
+  --v-fg: #f5f7fa;
+  --v-fg-soft: #c8d1de;
+  --v-muted: #8a94a6;
+  --v-line: rgba(255, 255, 255, 0.09);
+  --v-line-soft: rgba(255, 255, 255, 0.05);
+  --v-accent: #5b9bff;
+  --v-accent-hover: #7fb2ff;
+  --v-accent-soft: rgba(91, 155, 255, 0.12);
+  --v-accent-quiet: #3f7ee0;
+
+  /* En oscuro la elevación no se lee: la jerarquía la marca el borde */
+  --v-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --v-shadow-card: 0 8px 30px rgba(0, 0, 0, 0.55);
+  --v-shadow-panel: 0 30px 70px rgba(0, 0, 0, 0.7);
+  --v-shadow-brand: 0 8px 24px rgba(91, 155, 255, 0.22);
+
+  --v-glow: rgba(91, 155, 255, 0.16);
+  --v-panel-ring: rgba(255, 255, 255, 0.12);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color var(--duration-ui) var(--ease-ui);
+  }
+
+  :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: white;
+  }
+}
+
+@layer components {
+  /* -------------------------------------------------------------------------
+     Superficie de tarjeta única. El acabado (radio, borde, elevación, curva)
+     se define aquí y en ningún otro sitio: seis tarjetas que divergen poco a
+     poco es como se degrada un sistema de diseño.
+  ------------------------------------------------------------------------- */
+  .card-surface {
+    position: relative;
+    background-color: var(--color-raised);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    transition-property: box-shadow, transform, border-color, background-color;
+    transition-duration: var(--duration-ui);
+    transition-timing-function: var(--ease-ui);
+  }
+
+  .card-surface:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-line));
+    box-shadow: var(--shadow-card);
+    transform: translateY(-2px);
+  }
+
+  /* El foco de teclado se ve en toda la tarjeta, no solo en el enlace. */
+  .card-surface:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* -------------------------------------------------------------------------
+     Etiquetas "Dato real" / "Estimación".
+     El verde profundo que da contraste sobre fondo claro se vuelve ilegible
+     sobre el oscuro, así que el color se resuelve por tema aquí en lugar de
+     con condicionales repartidos por los componentes.
+  ------------------------------------------------------------------------- */
+  .badge-real {
+    background-color: color-mix(in srgb, var(--color-signal) 14%, transparent);
+    color: var(--color-signal-deep);
+  }
+
+  :root[data-theme="dark"] .badge-real {
+    color: var(--color-signal);
+  }
+
+  .badge-estimate {
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-hover);
+  }
+
+  :root[data-theme="dark"] .badge-estimate {
+    color: var(--color-accent);
+  }
+
+  /* Superficie de producto: siempre oscura, en los dos temas. */
+  .panel-surface {
+    background-image: linear-gradient(
+      145deg,
+      var(--color-panel-from),
+      var(--color-panel-via) 55%,
+      var(--color-panel-to)
+    );
+    color: var(--color-panel-fg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-surface:hover {
+      transform: none;
+    }
+  }
+}
+
+@layer utilities {
+  /* Cifras: alineación tabular para que no "bailen" al actualizarse */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* Halo de fondo, sensible al tema */
+  .glow-brand {
+    background: radial-gradient(circle, var(--v-glow), transparent 66%);
+  }
+}
+
+/* ===========================================================================
+   BORDER BEAM
+   Un punto de luz recorre el perímetro de la tarjeta. CSS puro mediante
+   `offset-path`: cero JavaScript, y el navegador lo compone fuera del hilo
+   principal. Inspirado en el patrón de Magic UI (MIT), reescrito sobre
+   nuestros tokens.
+=========================================================================== */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-beam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--beam-angle),
+    transparent 0deg,
+    transparent 300deg,
+    color-mix(in srgb, var(--color-accent) 85%, white) 345deg,
+    var(--color-signal) 360deg
+  );
+  /* El doble mask deja visible solo el trazo del borde */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam-rotate 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes beam-rotate {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+/* ===========================================================================
+   Animaciones del dashboard
+=========================================================================== */
+@keyframes voralis-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes voralis-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes voralis-trace {
+  from {
+    stroke-dashoffset: 320;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-rise {
+  animation: voralis-rise 0.6s var(--ease-ui) both;
+}
+
+.animate-signal-pulse {
+  animation: voralis-pulse 2.4s ease-in-out infinite;
+}
+
+.animate-trace {
+  stroke-dasharray: 320;
+  animation: voralis-trace 1.8s ease-out 0.3s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .border-beam::after {
+    animation: none;
+    background: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
