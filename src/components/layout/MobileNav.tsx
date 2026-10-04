@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
+import { CLOSE_MENU_EVENT } from "@/components/ui/HomeLink";
 import { nav } from "@/content/site";
 
 /**
@@ -13,6 +14,13 @@ import { nav } from "@/content/site";
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const panelId = useId();
+
+  /* Los logotipos de cabecera y pie cierran el menú al pulsarse. */
+  useEffect(() => {
+    const close = () => setOpen(false);
+    window.addEventListener(CLOSE_MENU_EVENT, close);
+    return () => window.removeEventListener(CLOSE_MENU_EVENT, close);
+  }, []);
 
   /* Bloquea el scroll de fondo y permite cerrar con Escape. */
   useEffect(() => {

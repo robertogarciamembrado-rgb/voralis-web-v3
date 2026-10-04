@@ -22,6 +22,7 @@ import { hero } from "@/content/home";
 export function Hero() {
   return (
     <section
+      id="inicio"
       aria-labelledby="hero-title"
       className="relative overflow-hidden border-b border-line bg-surface"
     >
@@ -43,7 +44,8 @@ export function Hero() {
 
             <h1
               id="hero-title"
-              className="mt-4 max-w-[22ch] text-balance text-display font-bold text-fg"
+              tabIndex={-1}
+              className="mt-4 max-w-[22ch] text-balance outline-none text-display font-bold text-fg"
             >
               {hero.headline.lead}{" "}
               <span className="text-accent">{hero.headline.emphasis}</span>

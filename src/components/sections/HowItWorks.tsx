@@ -1,101 +1,165 @@
 import Link from "next/link";
-import { ArrowRight, ShieldCheck } from "lucide-react";
-import { Section, SectionHeading, SectionLead } from "@/components/ui/Section";
+import { ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Section, SectionHeading } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { howItWorks } from "@/content/home";
 
 /**
- * BLOQUE 06 — CÓMO FUNCIONA (brief §12 y §13)
+ * 5 · CÓMO FUNCIONA: demo, vídeo y alta
  *
- * Aquí se resuelve la jerarquía de arquitectura, la regla más estricta del
- * brief:
- *
- *   VORALIS ─ plataforma / capa de inteligencia
- *     └─ Vigilante + Pulse ─ MOTORES (dos módulos grandes y simétricos)
- *          └─ Profesor · Congress · Historiador ─ agentes especializados
- *
- * Cómo se hace cumplir visualmente:
- * - Los motores son dos superficies de producto, grandes y del mismo tamaño:
- *   ninguno domina al otro y ambos dominan la sección.
- * - Los agentes especializados van después, en tarjetas claras, más pequeñas
- *   y con tipografía menor. No pueden competir con los motores.
- * - El brief prohíbe llamarlos "dos agentes más": la nomenclatura en pantalla
- *   es "motores de inteligencia".
+ * Módulo principal (Voralis Vigilante) con vídeo del alta, recorrido en seis
+ * pasos, alta en cuatro pasos, garantía y botón «Ver la demo». Debajo, dos
+ * módulos menores (Pulse «Próximamente», Congress «Bajo consulta») y la franja
+ * de confianza.
  */
 export function HowItWorks() {
+  const { main, minor, trust } = howItWorks;
+
   return (
     <Section id={howItWorks.id} tone="sunken" labelledBy="como-funciona-title">
       <Reveal>
         <Eyebrow>{howItWorks.eyebrow}</Eyebrow>
         <SectionHeading id="como-funciona-title">{howItWorks.headline}</SectionHeading>
-        <SectionLead>{howItWorks.lead}</SectionLead>
       </Reveal>
 
-      {/* ---- Los dos motores: peso visual máximo y simétrico --------- */}
-      <div className="mt-12 grid gap-4 lg:grid-cols-2">
-        {howItWorks.engines.map((engine, index) => (
-          <Reveal key={engine.name} delay={index * 0.1} className="h-full">
-            <article className="panel-surface relative h-full overflow-hidden rounded-panel p-8 shadow-panel sm:p-9">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full border border-brand-300/20 shadow-[0_0_0_2.25rem_rgba(161,215,255,0.05)]"
+      {/* ---- Módulo principal ----------------------------------------- */}
+      <Reveal>
+        <article className="panel-surface relative mt-12 overflow-hidden rounded-panel p-8 shadow-panel sm:p-10">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full border border-brand-300/20 shadow-[0_0_0_2.25rem_rgba(161,215,255,0.05)]"
+          />
+
+          <div className="relative flex items-center gap-3">
+            <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-brand-200">
+              <Icon name={main.icon as IconName} className="size-5" />
+            </span>
+            <h3 className="text-3xl font-extrabold tracking-[-0.045em]">{main.name}</h3>
+          </div>
+
+          {/* Vídeo del alta (90–120 s). Mientras no haya archivo, marcador visible. */}
+          <div className="relative mt-8 aspect-video overflow-hidden rounded-xl border border-white/12 bg-black/30">
+            {main.video.src ? (
+              <iframe
+                src={main.video.src}
+                title={main.video.title}
+                loading="lazy"
+                allowFullScreen
+                className="size-full"
               />
-
-              <div className="relative flex items-center gap-3">
-                <span className="grid size-11 place-items-center rounded-xl bg-white/10 text-brand-200">
-                  <Icon name={engine.icon as IconName} className="size-5" />
-                </span>
-                <p className="text-[0.6875rem] font-extrabold uppercase tracking-[0.12em] text-brand-300">
-                  Motor de inteligencia
-                </p>
+            ) : (
+              <div className="grid size-full place-items-center px-6 text-center text-sm font-semibold text-panel-muted">
+                {main.video.title}
               </div>
+            )}
+          </div>
 
-              <h3 className="relative mt-5 text-3xl font-extrabold tracking-[-0.045em]">
-                {engine.name}
-              </h3>
-              <p className="relative mt-3 text-pretty text-xl font-bold leading-snug tracking-[-0.03em] text-white/95">
-                {engine.title}
-              </p>
-              <p className="relative mt-3 text-[0.9375rem] leading-relaxed text-panel-muted">
-                {engine.role}
-              </p>
+          <h4 className="relative mt-10 text-[0.6875rem] font-extrabold uppercase tracking-[0.12em] text-brand-300">
+            {main.journeyTitle}
+          </h4>
+          <ol className="relative mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {main.steps.map((step, index) => (
+              <li
+                key={step.title}
+                className="rounded-xl border border-white/12 bg-white/[0.05] p-5"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="grid size-9 place-items-center rounded-lg bg-white/10 text-brand-200">
+                    <Icon name={step.icon as IconName} className="size-4" />
+                  </span>
+                  <span className="tabular text-[0.8125rem] font-extrabold tracking-[0.08em] text-panel-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <p className="mt-4 text-base font-bold tracking-[-0.025em] text-white">
+                  {step.title}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-panel-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
 
-              <ul className="relative mt-7 flex flex-wrap gap-2 border-t border-white/12 pt-6">
-                {engine.covers.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-lg border border-white/15 bg-white/[0.07] px-2.5 py-1.5 text-xs font-semibold text-brand-100"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          <h4 className="relative mt-10 text-[0.6875rem] font-extrabold uppercase tracking-[0.12em] text-brand-300">
+            {main.onboarding.title}
+          </h4>
+          <ol className="relative mt-5 flex flex-col gap-2 text-sm font-semibold text-white/90 md:flex-row md:flex-wrap md:items-center">
+            {main.onboarding.steps.map((step, index) => (
+              <li key={step} className="flex items-center gap-2">
+                {index > 0 ? (
+                  <span aria-hidden="true" className="hidden text-brand-300 md:inline">
+                    →
+                  </span>
+                ) : null}
+                {step}
+              </li>
+            ))}
+          </ol>
+
+          <p className="relative mt-8 rounded-xl border border-signal/30 bg-signal/10 px-5 py-4 text-[0.9375rem] font-bold leading-relaxed text-white">
+            {main.guarantee}
+          </p>
+
+          <div className="relative mt-8">
+            <Button href={main.cta.href} variant="inverse" trailingArrow>
+              {main.cta.label}
+            </Button>
+          </div>
+        </article>
+      </Reveal>
+
+      {/* ---- Módulos menores ------------------------------------------ */}
+      <ul className="mt-4 grid gap-4 md:grid-cols-2">
+        {minor.map((module, index) => (
+          <Reveal
+            key={module.name}
+            as="li"
+            delay={index * 0.07}
+            className="card-surface flex h-full flex-col p-6 sm:p-7"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <span className="grid size-9 place-items-center rounded-lg bg-accent-soft text-accent">
+                <Icon name={module.icon as IconName} className="size-4" />
+              </span>
+              <span className="rounded-full border border-line bg-sunken px-2.5 py-1 text-[0.625rem] font-extrabold uppercase tracking-wider text-fg-soft">
+                {module.status}
+              </span>
+            </div>
+            <h3 className="mt-4 text-lg font-bold tracking-[-0.03em] text-fg">{module.name}</h3>
+            <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">{module.body}</p>
+            {/* Pulse: lista de espera (enlace discreto). Congress: botón «Hablar con ventas». */}
+            <div className="mt-auto pt-6">
+              {module.name === "Voralis Congress" ? (
+                <Button href={module.cta.href} variant="secondary" size="md">
+                  {module.cta.label}
+                </Button>
+              ) : (
+                <Link
+                  href={module.cta.href}
+                  className="text-sm font-extrabold text-accent transition-colors duration-300 hover:text-accent-hover"
+                >
+                  {module.cta.label} →
+                </Link>
+              )}
+            </div>
           </Reveal>
         ))}
-      </div>
+      </ul>
 
-      {/* ---- Cómo operan: señal de confianza, no letra pequeña -------
-          No es un bloque nuevo (el brief limita a 7): vive dentro de "Cómo
-          funciona" porque describe el modo de operar de los motores. Para una
-          plataforma de inteligencia vendida en la UE, esto es argumento
-          comercial. */}
+      {/* ---- Franja de confianza -------------------------------------- */}
       <Reveal>
         <div className="card-surface mt-4 flex flex-col gap-5 p-7 sm:flex-row sm:items-start sm:gap-6 sm:p-8">
           <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-signal/12 text-signal-deep">
             <ShieldCheck aria-hidden="true" className="size-5" strokeWidth={1.75} />
           </span>
           <div>
-            <h3 className="text-lg font-bold tracking-[-0.03em] text-fg">
-              {howItWorks.compliance.title}
-            </h3>
-            <p className="mt-2 max-w-[46rem] text-[0.9375rem] leading-relaxed text-muted">
-              {howItWorks.compliance.body}
+            <p className="max-w-[46rem] text-[0.9375rem] leading-relaxed text-fg-soft">
+              {trust.body}
             </p>
             <ul className="mt-4 flex flex-wrap gap-2">
-              {howItWorks.compliance.tags.map((tag) => (
+              {trust.tags.map((tag) => (
                 <li
                   key={tag}
                   className="rounded-lg border border-line bg-sunken px-2.5 py-1.5 text-xs font-semibold text-fg-soft"
@@ -107,48 +171,6 @@ export function HowItWorks() {
           </div>
         </div>
       </Reveal>
-
-      {/* ---- Agentes especializados: deliberadamente secundarios ----- */}
-      <div className="mt-14 border-t border-line pt-12">
-        <Reveal>
-          <Eyebrow>{howItWorks.specialists.eyebrow}</Eyebrow>
-          <h3 className="mt-3 max-w-[36rem] text-pretty text-2xl font-bold tracking-[-0.04em] text-fg">
-            {howItWorks.specialists.headline}
-          </h3>
-        </Reveal>
-
-        <ul className="mt-8 grid gap-3 md:grid-cols-3">
-          {howItWorks.specialists.items.map((agent, index) => (
-            <Reveal
-              key={agent.name}
-              as="li"
-              delay={index * 0.07}
-              className="card-surface h-full p-5 sm:p-6"
-            >
-              <span className="grid size-9 place-items-center rounded-lg bg-accent-soft text-accent">
-                <Icon name={agent.icon as IconName} className="size-4" />
-              </span>
-              <h4 className="mt-4 text-base font-bold tracking-[-0.025em] text-fg">{agent.name}</h4>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{agent.body}</p>
-              <p className="mt-3 text-xs leading-relaxed text-muted">{agent.use}</p>
-            </Reveal>
-          ))}
-        </ul>
-
-        <Reveal>
-          <Link
-            href={howItWorks.specialists.cta.href}
-            className="group mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-accent transition-colors duration-300 hover:text-accent-hover"
-          >
-            {howItWorks.specialists.cta.label}
-            <ArrowRight
-              aria-hidden="true"
-              className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
-              strokeWidth={2.5}
-            />
-          </Link>
-        </Reveal>
-      </div>
     </Section>
   );
 }

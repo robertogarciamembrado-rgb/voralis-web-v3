@@ -89,7 +89,7 @@ Estas no son preferencias de estilo; son restricciones. Si alguien las rompe, la
 | Server Components por defecto | ✅ Tres islas de cliente: `MobileNav`, `ThemeToggle`, `Reveal` |
 | Estructura modular | ✅ Un componente por bloque + primitivas en `ui/` |
 | `next/link` para navegación | ✅ Todos los enlaces internos |
-| `next/image` | ➖ El proyecto no tiene imágenes: el dashboard del hero es SVG y DOM, el logo es CSS. Cuando entren capturas de caso, obligatorio |
+| `next/image` | ➖ El proyecto no tiene imágenes fotográficas: el dashboard del hero es SVG y DOM; los logotipos usan los SVG de marca como máscaras CSS. Cuando entren capturas de caso, obligatorio |
 | Espacios generosos | ✅ `py-20 → 28` por sección, `p-7 → p-9` en tarjetas |
 | Paleta coherente y sobria | ✅ Tokens semánticos conmutables por tema; ningún hex en componentes |
 | Tipografía cuidada | ✅ Pesos, `tracking` y `leading` definidos por escala, no ad hoc |

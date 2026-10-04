@@ -15,9 +15,6 @@ export function Problem() {
         <Eyebrow>{problem.eyebrow}</Eyebrow>
         <SectionHeading id="problema-title">{problem.headline}</SectionHeading>
         <SectionLead>{problem.lead}</SectionLead>
-        <p className="mt-4 max-w-[41rem] text-pretty text-lg font-semibold leading-relaxed text-fg">
-          {problem.emphasis}
-        </p>
       </Reveal>
 
       <ul className="mt-12 grid gap-4 md:grid-cols-3">
@@ -41,10 +38,6 @@ export function Problem() {
           </Reveal>
         ))}
       </ul>
-
-      <Reveal>
-        <p className="mt-10 text-xl font-bold tracking-[-0.035em] text-fg">{problem.closing}</p>
-      </Reveal>
     </Section>
   );
 }

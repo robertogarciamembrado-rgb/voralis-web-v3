@@ -4,8 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { finalCta } from "@/content/home";
 
 /**
- * BLOQUE 07 — CTA FINAL (brief §15)
- * Cierra pidiendo el problema del visitante, no una demo de producto.
+ * 7 · LLAMADA FINAL — Solicitar alta · Ver la demo.
  */
 export function FinalCta() {
   return (

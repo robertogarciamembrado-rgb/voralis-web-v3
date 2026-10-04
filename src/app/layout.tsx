@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import brandIcon from "@/content/Isotipo-Voralis-en-fondo-transparente.svg";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
@@ -34,25 +35,27 @@ const inter = localFont({
 });
 
 /**
- * Metadata orientada al posicionamiento del brief (§1): plataforma de
- * inteligencia y conocimiento. Sin lenguaje de automatización ni mención a
- * TS Orbix en el mensaje comercial.
+ * Metadata según Voralis_Textos_Landing_v2.md: la marca es Voralis y el
+ * producto, Voralis Vigilante. Todo el texto trata al visitante de «usted».
  */
 export const metadata: Metadata = {
   metadataBase: new URL("https://voralis.com"),
+  icons: {
+    icon: [{ url: brandIcon.src, type: "image/svg+xml" }],
+  },
   title: {
-    default: "VORALIS — Inteligencia para entender lo que está pasando",
-    template: "%s · VORALIS",
+    default: "Voralis — Inteligencia de negocio para anticiparse",
+    template: "%s · Voralis",
   },
   description:
-    "VORALIS conecta la información interna de tu organización con fuentes externas y señales en tiempo real para entender qué está pasando, detectar lo relevante y anticiparte.",
+    "Voralis Vigilante lee cada día las fuentes que importan en su sector, filtra el ruido y le entrega señales, alertas e informes con contexto y fuente, revisados por personas antes de publicarse.",
   openGraph: {
     type: "website",
     locale: "es_ES",
-    siteName: "VORALIS",
-    title: "VORALIS — Inteligencia para entender lo que está pasando",
+    siteName: "Voralis",
+    title: "Voralis — Inteligencia de negocio para anticiparse",
     description:
-      "Convierte la información de tu entorno en inteligencia para decidir mejor.",
+      "Convierta la información de su entorno en inteligencia para decidir mejor.",
   },
 };
 

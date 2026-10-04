@@ -10,15 +10,33 @@ const impactTones = {
 
 type ImpactTone = keyof typeof impactTones;
 
+/* Orden de mayor a menor impacto: desempata el nivel dominante. */
+const impactRank: Record<ImpactTone, number> = { high: 0, mid: 1, low: 2 };
+const impactName: Record<ImpactTone, string> = { high: "ALTO", mid: "MEDIO", low: "BAJO" };
+
+/** Porcentajes enteros que suman 100 (método del mayor resto). */
+function roundedShares(values: readonly number[]): number[] {
+  const total = values.reduce((a, b) => a + b, 0);
+  const exact = values.map((v) => (v / total) * 100);
+  const result = exact.map(Math.floor);
+  let missing = 100 - result.reduce((a, b) => a + b, 0);
+  exact
+    .map((x, i) => ({ i, rem: x - Math.floor(x) }))
+    .sort((a, b) => b.rem - a.rem)
+    .forEach(({ i }) => {
+      if (missing-- > 0) result[i] += 1;
+    });
+  return result;
+}
+
 /**
  * Visual del hero (brief §7): réplica del RADAR ESTRATÉGICO, la pantalla de
  * entrada real del producto.
  *
  * Reproduce lo que define la especificación funcional: cabecera con selector
  * temporal e indicador de frescura, cuatro KPIs ejecutivos con la
- * nomenclatura ya aprobada ("Información relevante", "Alto impacto",
- * "Tendencias en auge", "Nuevos temas"), actividad informativa a 30 días y
- * reparto de impacto.
+ * nomenclatura ya aprobada, actividad informativa a 30 días, impacto medio del
+ * periodo y reparto de impacto. No muestra variaciones porcentuales.
  *
  * Decisiones de diseño:
  * - Superficie oscura en los dos temas: representa una pantalla de producto,
@@ -32,6 +50,22 @@ type ImpactTone = keyof typeof impactTones;
 export function IntelligenceDashboard({ className }: { className?: string }) {
   const d = heroDashboard;
   const impactTotal = d.impactMix.reduce((sum, item) => sum + item.value, 0);
+
+  /* Nivel de impacto dominante: el de más piezas; si hay empate, el más alto. */
+  const dominant =
+    impactTotal > 0
+      ? [...d.impactMix].sort(
+          (a, b) =>
+            b.value - a.value ||
+            impactRank[a.tone as ImpactTone] - impactRank[b.tone as ImpactTone],
+        )[0]
+      : null;
+
+  /* El reparto se calcula sobre las mismas piezas que «Información relevante»:
+     si no suman lo mismo, el gráfico se oculta en lugar de mostrar cifras que no cuadran. */
+  // TODO: pendiente de la exportación corregida de demo.json
+  const showImpactMix = impactTotal === d.relevantTotal;
+  const impactShares = showImpactMix ? roundedShares(d.impactMix.map((i) => i.value)) : [];
 
   return (
     <div className={cn("relative", className)}>
@@ -98,26 +132,15 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
           <div className="relative flex flex-col gap-3 p-4 sm:p-5">
             {/* ---- KPIs ejecutivos ------------------------------------ */}
             <ul className="grid grid-cols-2 gap-2.5">
-              {d.kpis.map((kpi) => (
-                <li
-                  key={kpi.label}
-                  className="rounded-xl border border-white/10 bg-white/[0.045] p-3"
-                >
-                  <p className="text-[0.625rem] font-bold uppercase leading-tight tracking-[0.08em] text-panel-muted">
-                    {kpi.label}
-                  </p>
-                  <p className="mt-1.5 flex items-baseline gap-2">
-                    <span className="tabular text-2xl font-extrabold leading-none tracking-[-0.045em]">
-                      {kpi.value}
-                    </span>
-                    {kpi.delta ? (
-                      <span className="tabular text-[0.6875rem] font-extrabold text-signal">
-                        ↑ {kpi.delta}
-                      </span>
-                    ) : null}
-                  </p>
-                </li>
-              ))}
+              <Kpi label="Información relevante" value={String(d.relevantTotal)} />
+              <Kpi label="Ejes activos" value={String(d.activeAxes)} />
+              {dominant ? (
+                <Kpi
+                  label="Impacto medio del periodo"
+                  value={impactName[dominant.tone as ImpactTone]}
+                  className="col-span-2"
+                />
+              ) : null}
             </ul>
 
             {/* ---- Actividad informativa ------------------------------ */}
@@ -131,15 +154,12 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
                     {d.activity.caption}
                   </p>
                 </div>
-                <span className="tabular shrink-0 rounded-full bg-signal/15 px-2 py-1 text-[0.6875rem] font-extrabold text-signal">
-                  ↑ {d.activity.delta}
-                </span>
               </div>
 
               <div className="mt-3 text-white">
                 <Sparkline
                   series={d.activity.series}
-                  label={`${d.activity.label}, ${d.activity.caption}: tendencia creciente, ${d.activity.delta} respecto al periodo anterior`}
+                  label={`${d.activity.label}, ${d.activity.caption}: tendencia creciente`}
                 />
               </div>
 
@@ -155,7 +175,7 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
                   >
                     <span className="truncate text-white/85">{topic.name}</span>
                     <span className="tabular shrink-0 font-extrabold text-signal">
-                      ↑ {topic.delta}
+                      {topic.count}
                     </span>
                   </li>
                 ))}
@@ -163,6 +183,7 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
             </div>
 
             {/* ---- Reparto de impacto --------------------------------- */}
+            {showImpactMix ? (
             <div className="rounded-xl border border-white/10 bg-white/[0.045] p-4">
               <p className="text-[0.625rem] font-bold uppercase tracking-[0.08em] text-panel-muted">
                 Impacto de la información
@@ -173,7 +194,7 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
                 className="mt-2.5 flex h-2 overflow-hidden rounded-full bg-white/10"
                 role="img"
                 aria-label={d.impactMix
-                  .map((item) => `${item.value} de impacto ${item.label.toLowerCase()}`)
+                  .map((item, i) => `${impactShares[i]} % de impacto ${item.label.toLowerCase()}`)
                   .join(", ")}
               >
                 {d.impactMix.map((item) => (
@@ -186,7 +207,7 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
               </div>
 
               <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-                {d.impactMix.map((item) => (
+                {d.impactMix.map((item, i) => (
                   <li
                     key={item.label}
                     className="flex items-center gap-1.5 text-[0.75rem] text-white/85"
@@ -198,12 +219,13 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
                         impactTones[item.tone as ImpactTone].dot,
                       )}
                     />
-                    <span className="tabular font-extrabold">{item.value}</span>
                     <span className="text-panel-muted">{item.label}</span>
+                    <span className="tabular font-extrabold">{impactShares[i]} %</span>
                   </li>
                 ))}
               </ul>
             </div>
+            ) : null}
           </div>
 
           {/* ---- Cierre: mensaje visual del hero --------------------- */}
@@ -213,5 +235,18 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function Kpi({ label, value, className }: { label: string; value: string; className?: string }) {
+  return (
+    <li className={cn("rounded-xl border border-white/10 bg-white/[0.045] p-3", className)}>
+      <p className="text-[0.625rem] font-bold uppercase leading-tight tracking-[0.08em] text-panel-muted">
+        {label}
+      </p>
+      <p className="tabular mt-1.5 text-2xl font-extrabold leading-none tracking-[-0.045em]">
+        {value}
+      </p>
+    </li>
   );
 }

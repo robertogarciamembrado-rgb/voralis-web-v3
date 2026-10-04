@@ -1,5 +1,10 @@
 import {
+  Bell,
+  Eye,
+  FileText,
+  Globe,
   GraduationCap,
+  Languages,
   Layers,
   Library,
   Link2,
@@ -8,6 +13,7 @@ import {
   Radar,
   ScrollText,
   TrendingUp,
+  UserCheck,
   Waves,
   Zap,
   type LucideIcon,
@@ -34,6 +40,12 @@ const registry = {
   graduation: GraduationCap,
   presentation: Presentation,
   scroll: ScrollText,
+  bell: Bell,
+  filetext: FileText,
+  globe: Globe,
+  eye: Eye,
+  usercheck: UserCheck,
+  languages: Languages,
 } satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof registry;

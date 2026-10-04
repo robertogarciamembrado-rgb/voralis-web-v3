@@ -15,7 +15,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-30 border-b border-line bg-surface/80 backdrop-blur-xl">
       <Container className="relative">
         <div className="flex h-[4.25rem] items-center justify-between gap-4">
-          <Logo />
+          <Logo className="animate-rise [animation-delay:80ms]" />
 
           <nav aria-label="Navegación principal" className="hidden lg:block">
             <ul className="flex items-center gap-8">

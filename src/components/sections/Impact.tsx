@@ -1,4 +1,4 @@
-import { Section, SectionHeading, SectionLead } from "@/components/ui/Section";
+import { Section, SectionHeading } from "@/components/ui/Section";
 import { DataKindBadge } from "@/components/ui/DataKindBadge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
@@ -20,7 +20,6 @@ export function Impact() {
       <Reveal>
         <Eyebrow>{impact.eyebrow}</Eyebrow>
         <SectionHeading id="resultados-title">{impact.headline}</SectionHeading>
-        <SectionLead>{impact.lead}</SectionLead>
       </Reveal>
 
       <div className="mt-12 grid gap-4 lg:grid-cols-[1.05fr_1fr]">
@@ -51,10 +50,6 @@ export function Impact() {
                 {e.formula}
               </p>
             </div>
-
-            <p className="relative mt-4 text-xs leading-relaxed text-panel-muted">
-              {e.disclaimer}
-            </p>
           </div>
         </Reveal>
 
@@ -74,17 +69,10 @@ export function Impact() {
               <p className="mt-2 text-sm font-semibold leading-snug text-fg-soft">
                 {metric.label}
               </p>
-              {"period" in metric && metric.period ? (
-                <p className="mt-1 text-xs text-muted">{metric.period}</p>
-              ) : null}
             </Reveal>
           ))}
         </ul>
       </div>
-
-      <Reveal>
-        <p className="mt-8 max-w-[46rem] text-sm leading-relaxed text-muted">{impact.note}</p>
-      </Reveal>
     </Section>
   );
 }

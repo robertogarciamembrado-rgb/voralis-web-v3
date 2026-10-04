@@ -5,17 +5,13 @@ import { Impact } from "@/components/sections/Impact";
 import { Cases } from "@/components/sections/Cases";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { Pricing } from "@/components/sections/Pricing";
+import { SHOW_PRICING } from "@/content/site";
 
 /**
- * Home de VORALIS.
- *
- * Estructura de 7 bloques (máximo innegociable del brief §4). No añadir
- * secciones aquí sin retirar otra: la home corta es un requisito comercial,
- * no una preferencia de diseño.
- *
- * Orden narrativo: beneficio → capacidad → prueba → tecnología.
- * La tecnología (Vigilante, Pulse, agentes) aparece deliberadamente en el
- * bloque 6, después de que los resultados y los casos hayan demostrado valor.
+ * Home de Voralis. Orden según Voralis_Textos_Landing_v2.md:
+ * 1 Portada · 2 Problema · 3 Para qué y para quién · 4 Resultados y casos ·
+ * 5 Cómo funciona · (6 Planes, Fase 3, tras el interruptor) · 7 Llamada final.
  */
 export default function HomePage() {
   return (
@@ -24,8 +20,9 @@ export default function HomePage() {
       {/* 02 */} <Problem />
       {/* 03 */} <Capabilities />
       {/* 04 */} <Impact />
-      {/* 05 */} <Cases />
-      {/* 06 */} <HowItWorks />
+      {/* 04 */} <Cases />
+      {/* 05 */} <HowItWorks />
+      {/* 06 */} {SHOW_PRICING ? <Pricing /> : null}
       {/* 07 */} <FinalCta />
     </>
   );
