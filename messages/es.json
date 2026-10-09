@@ -1,0 +1,612 @@
+{
+  "Common": {
+    "skipToContent": "Saltar al contenido",
+    "viewCatalog": "Ver catálogo",
+    "available": "Disponible",
+    "soon": "Próximamente",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "changeLanguage": "Cambiar idioma",
+    "requiredMark": "(obligatorio)",
+    "selectOption": "Seleccione una opción",
+    "externalLinkNotice": "Enlace externo",
+    "newTab": "se abre en una pestaña nueva",
+    "homeLinkAriaLabel": "Voralis — Inicio",
+    "theme": {
+      "changeToLight": "Cambiar a tema claro",
+      "changeToDark": "Cambiar a tema oscuro",
+      "changeTheme": "Cambiar tema"
+    },
+    "dataKind": {
+      "real": "Dato real",
+      "estimate": "Estimación",
+      "target": "Objetivo de diseño"
+    },
+    "carousel": {
+      "ariaLabel": "Redes que publican con Voralis",
+      "previous": "Red anterior",
+      "next": "Red siguiente",
+      "selectNetwork": "Seleccionar red",
+      "goToNetwork": "Ir a la red {index}",
+      "slideLabel": "{index} de {total}: {name}"
+    }
+  },
+  "Site": {
+    "name": "Voralis",
+    "title": "Voralis — Inteligencia de negocio para anticiparse",
+    "titleTemplate": "{title} · Voralis",
+    "description": "Voralis Vigilante lee cada día las fuentes que importan en su sector, filtra el ruido y le entrega señales, alertas e informes con contexto y fuente, revisados por personas antes de publicarse.",
+    "openGraphDescription": "Convierta la información de su entorno en inteligencia para decidir mejor."
+  },
+  "Nav": {
+    "mainAriaLabel": "Navegación principal",
+    "mainMobileAriaLabel": "Navegación principal (móvil)",
+    "whatIs": "Qué es Voralis",
+    "forWhom": "Para quién",
+    "results": "Resultados",
+    "howItWorks": "Cómo funciona",
+    "pricing": "Planes",
+    "catalog": "Catálogo"
+  },
+  "Footer": {
+    "linksAriaLabel": "Enlaces legales y contacto",
+    "tagline": "Voralis convierte la información de su entorno en inteligencia para decidir mejor.",
+    "legalNotice": "Aviso legal",
+    "privacy": "Privacidad",
+    "terms": "Condiciones",
+    "aiUse": "Uso de IA",
+    "cookies": "Cookies",
+    "contact": "Contacto",
+    "copyright": "© {entity} · Voralis es una marca bajo licencia de {entity}"
+  },
+  "Actions": {
+    "requestOnboarding": "Solicitar alta",
+    "viewDemo": "Ver la demo",
+    "contactSales": "Hablar con ventas"
+  },
+  "Legal": {
+    "titles": {
+      "aviso-legal": "Aviso legal",
+      "privacidad": "Privacidad",
+      "condiciones": "Condiciones",
+      "uso-de-ia": "Uso de IA",
+      "cookies": "Cookies"
+    },
+    "placeholder": "Texto legal provisional. El texto definitivo está pendiente de validación jurídica y se publicará aquí."
+  },
+  "Catalog": {
+    "title": "Informes de nuestros clientes.",
+    "lead": "Organizaciones que usan Voralis y publican sus informes. Cada informe lo publica su autor en su propia web.",
+    "footer": "¿Quiere que su informe aparezca aquí?",
+    "watchesLabel": "Qué vigila",
+    "audienceLabel": "Para quién",
+    "summaryLabel": "Ficha",
+    "exitNotice": "Va a salir de Voralis. Este informe lo publica {network} en su web. Voralis no aloja ni sirve el informe.",
+    "exitActions": {
+      "continue": "Continuar",
+      "cancel": "Cancelar"
+    },
+    "networks": [
+      {
+        "id": "tstt",
+        "name": "Tourism & Society Think Tank",
+        "mark": "TSTT",
+        "color": "#0f766e",
+        "report": "Informe de Inteligencia Turística",
+        "watches": "Tendencias, impacto social, económico y cultural, y sostenibilidad del turismo",
+        "audience": "Profesionales, empresas e instituciones del turismo",
+        "summary": "Turismo y sociedad · 10 ejes · 11 sectores",
+        "languages": "ES · EN",
+        "status": "Mensual · Última: julio de 2026",
+        "cta": "Ver informe",
+        "available": true,
+        "href": {
+          "es": "https://esp.tourismandsocietytt.com/noticias-y-newsletter/2026/2026-octubre/ultimas-noticias/tstt-presenta-un-nuevo-informe-mensual-de-inteligencia-tur%C3%ADstica-para-compr",
+          "en": "https://www.tourismandsocietytt.com/news-and-newsletter/2026/2026-october/ultimas-noticias/tstt-launches-a-new-monthly-tourism-intelligence-report-to-understand-the-e"
+        }
+      },
+      {
+        "id": "wrtn",
+        "name": "World Religious Tourism Network",
+        "mark": "WRTN",
+        "color": "#7c3aed",
+        "report": "Radar del turismo religioso y espiritual",
+        "watches": "Destinos, organizaciones, empresas y expertos del turismo religioso y espiritual",
+        "audience": "Destinos, organizaciones y profesionales de Europa y América",
+        "summary": "Destinos, patrimonio y comunidades de fe",
+        "languages": "ES · EN",
+        "status": "Próximamente · primera edición",
+        "cta": "Conocer la red",
+        "available": false,
+        "href": {
+          "es": "https://www.tourismandsocietytt.com/world-religious-tourism-network",
+          "en": "https://www.tourismandsocietytt.com/world-religious-tourism-network"
+        }
+      },
+      {
+        "id": "wctn",
+        "name": "World Cacao Tourism Network",
+        "mark": "WCTN",
+        "color": "#b45309",
+        "report": "Radar del turismo del cacao",
+        "watches": "Destinos y países productores, experiencias en torno al cacao, sostenibilidad y patrimonio local",
+        "audience": "Destinos, productores, operadores, universidades y comunidades locales",
+        "summary": "Destinos productores, cultura y experiencias",
+        "languages": "ES · EN",
+        "status": "Próximamente · primera edición",
+        "cta": "Conocer la red",
+        "available": false,
+        "href": {
+          "es": "https://www.tourismandsocietytt.com/world-cacao-tourism-network",
+          "en": "https://www.tourismandsocietytt.com/world-cacao-tourism-network"
+        }
+      }
+    ]
+  },
+  "Demo": {
+    "title": "Así trabaja un vigilante de Voralis.",
+    "lead": "Esta es una edición de ejemplo con datos reales del vigilante del Tourism & Society Think Tank. Explore el radar y las noticias tal como las ve su equipo.",
+    "label": "Edición de ejemplo · {date}",
+    "blocks": {
+      "radar": "Radar",
+      "news": "Noticias relevantes",
+      "thumbnails": "Miniaturas del informe",
+      "video": "Vídeo del alta"
+    },
+    "pending": "Contenido de la edición de ejemplo pendiente de exportar.",
+    "aiNote": "Los resúmenes se elaboran con inteligencia artificial a partir de fuentes públicas y con revisión humana.",
+    "closing": "¿Quiere un radar como este para su organización?"
+  },
+  "Signup": {
+    "title": "Cuéntenos qué necesita vigilar.",
+    "lead": "Déjenos su web. Nuestro sistema analiza cómo se presenta su organización y prepara una primera radiografía, que le presentaremos en la reunión para ajustarla con usted.",
+    "fields": {
+      "web": {
+        "label": "Web de su organización",
+        "help": "Puede ser la web principal o la página que mejor describa su organización o red."
+      },
+      "tipo": { "label": "Tipo de organización" },
+      "nombre": { "label": "Nombre y apellidos" },
+      "cargo": { "label": "Cargo" },
+      "correo": { "label": "Correo electrónico" },
+      "telefono": { "label": "Teléfono" },
+      "competidores": {
+        "label": "Competidores o referentes",
+        "help": "Webs de organizaciones con las que se compara o que quiere seguir de cerca.",
+        "addButton": "Añadir otro"
+      },
+      "prioridades": {
+        "label": "¿Qué le gustaría vigilar o qué le preocupa?",
+        "maxLength": 500
+      }
+    },
+    "tiposOrganizacion": [
+      { "value": "medio", "label": "Medio de comunicación" },
+      { "value": "consultora", "label": "Consultora" },
+      { "value": "think_tank", "label": "Think tank o centro de pensamiento" },
+      { "value": "observatorio_destino", "label": "Observatorio de destino" },
+      { "value": "administracion", "label": "Administración u organismo público" },
+      { "value": "empresa", "label": "Empresa" },
+      { "value": "gremio", "label": "Gremio, asociación o cámara de comercio" },
+      { "value": "universidad", "label": "Universidad o centro de investigación" },
+      { "value": "agencia", "label": "Agencia de comunicación o marketing" },
+      { "value": "eventos", "label": "Organizador de eventos, ferias o congresos" },
+      { "value": "inversor", "label": "Inversor o entidad financiera" }
+    ],
+    "submit": "Solicitar alta",
+    "submitting": "Enviando…",
+    "note": "No hay ningún compromiso hasta que acepte la propuesta.",
+    "existingAccount": {
+      "prompt": "¿Ya tienes cuenta?",
+      "linkLabel": "Inicia sesión",
+      "href": "https://vigilante.avia-global.com"
+    },
+    "confirmation": {
+      "title": "Gracias.",
+      "text": "Estamos analizando cómo se presenta su organización en su web. Le escribiremos para agendar la reunión en la que le enseñamos el resultado."
+    },
+    "errorFallback": "No hemos podido enviar su solicitud. Inténtelo de nuevo o escríbanos desde Contacto.",
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "url": "Indique una dirección web válida, por ejemplo www.suorganizacion.com.",
+      "email": "Indique un correo electrónico válido.",
+      "privacy": "Para continuar, acepte la política de privacidad."
+    },
+    "consent": {
+      "privacyPrefix": "Acepto la ",
+      "privacyLinkText": "política de privacidad",
+      "privacyLinkHref": "/legal/privacidad",
+      "privacySuffix": " y que Voralis analice con inteligencia artificial la información pública de las webs indicadas para preparar mi propuesta.",
+      "communications": "Quiero recibir novedades e información comercial de Voralis."
+    }
+  },
+  "Contact": {
+    "title": "Hablemos.",
+    "lead": "Para planes Observatorio, administraciones públicas, Voralis Congress o cualquier consulta.",
+    "reasons": [
+      { "value": "observatorio", "label": "Observatorio" },
+      { "value": "administracion", "label": "Administración pública" },
+      { "value": "congress", "label": "Voralis Congress" },
+      { "value": "pulse", "label": "Lista de espera de Voralis Pulse" },
+      { "value": "otro", "label": "Otro" }
+    ],
+    "fields": {
+      "nombre": "Nombre",
+      "organizacion": "Organización",
+      "correo": "Correo electrónico",
+      "motivo": "Motivo",
+      "mensaje": "Mensaje"
+    },
+    "mensajePulseHelp": "Le avisaremos por correo cuando Voralis Pulse esté disponible.",
+    "submit": "Hablar con ventas",
+    "submitting": "Enviando…",
+    "confirmation": {
+      "title": "Gracias.",
+      "text": "Le responderemos lo antes posible.",
+      "textPulse": "Le avisaremos en cuanto Voralis Pulse esté disponible."
+    },
+    "errorFallback": "No hemos podido enviar su mensaje. Inténtelo de nuevo o escríbanos directamente.",
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "email": "Indique un correo electrónico válido.",
+      "privacy": "Para continuar, acepte la política de privacidad."
+    },
+    "consent": {
+      "privacyPrefix": "Acepto la ",
+      "privacyLinkText": "política de privacidad",
+      "privacyLinkHref": "/legal/privacidad",
+      "privacySuffix": " y que Voralis utilice mis datos para responder a mi consulta.",
+      "communications": "Quiero recibir novedades e información comercial de Voralis."
+    }
+  },
+  "FAQ": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      {
+        "q": "¿Qué es un vigilante?",
+        "a": "Es un motor de inteligencia configurado para su tema: un perfil, unos sectores, unos ejes temáticos y una lista de fuentes. Cada día lee lo publicado, lo puntúa por relevancia y le entrega solo lo que importa."
+      },
+      {
+        "q": "¿De dónde sale la información?",
+        "a": "De fuentes públicas: medios sectoriales, organismos oficiales, universidades, think tanks y organizaciones de referencia. Cada pieza enlaza a su fuente original."
+      },
+      {
+        "q": "¿Qué papel tiene la inteligencia artificial?",
+        "a": "Clasifica, puntúa y resume la información, y redacta el borrador de cada informe. Antes de publicar, una persona lo revisa y lo aprueba. Todo contenido generado con IA se identifica como tal."
+      },
+      {
+        "q": "¿Cómo es el alta?",
+        "a": "Nos cuenta qué quiere vigilar y preparamos su perfil antes de la primera reunión. En esa reunión lo ajustamos con usted. La lectura diaria empieza el día de la activación y el primer radar llega en días."
+      },
+      {
+        "q": "¿Y si el resultado no es el acordado?",
+        "a": "Si en los primeros 30 días la primera cosecha no cumple lo que acordamos por escrito, le devolvemos el primer mes. Su configuración es suya y puede llevársela."
+      },
+      {
+        "q": "¿Qué son los créditos?",
+        "a": "Cada plan incluye una bolsa de créditos al mes. Cada vigilante activo usa una parte fija, y el resto se reparte entre informes, versiones en otros idiomas y el asistente. Si se queda corto, puede comprar más. La lectura diaria de sus fuentes nunca se detiene por falta de créditos."
+      },
+      {
+        "q": "¿En qué idiomas están los informes?",
+        "a": "Las fuentes se leen en español e inglés. El informe se redacta en español o en inglés, y puede tener versiones revisadas en francés, alemán, portugués e italiano."
+      },
+      {
+        "q": "¿Puedo cambiar lo que vigilo?",
+        "a": "Sí. Sus administradores ajustan fuentes, palabras clave, ejes y sectores cuando lo necesiten, dentro de su plan."
+      },
+      {
+        "q": "¿Quién de mi equipo puede entrar?",
+        "a": "Los administradores configuran y gestionan. Los lectores tienen uno de cuatro niveles: consulta, informes, analista o curador."
+      },
+      {
+        "q": "¿Puedo compartir los informes fuera de mi organización?",
+        "a": "Sí. Puede publicarlos en su web o dar acceso a lectores externos, y decidir si les cobra."
+      },
+      {
+        "q": "¿Puede contratar una administración pública?",
+        "a": "Sí. Ofrecemos un contrato anual adaptado a la vía de contratación de cada organismo, con factura electrónica y revisión humana de cada informe."
+      },
+      {
+        "q": "¿Puedo cancelar?",
+        "a": "Sí. Los planes mensuales no tienen permanencia. Si cancela, conservamos sus vigilantes congelados durante 90 días por si vuelve, y su configuración se puede exportar."
+      },
+      {
+        "q": "¿Los informes del catálogo son de Voralis?",
+        "a": "No. Cada informe lo publica la organización que lo elabora, en su propia web, y responde de su contenido."
+      }
+    ]
+  },
+  "Solutions": {
+    "title": "Una misma inteligencia, once formas de sacarle partido.",
+    "labels": {
+      "watches": "Qué vigila",
+      "value": "Cómo genera valor",
+      "hiring": "Cómo se contrata",
+      "plan": "Plan recomendado"
+    },
+    "items": [
+      {
+        "slug": "medios",
+        "name": "Medios de comunicación",
+        "headline": "Convierta la actualidad de su sector en un producto propio.",
+        "watches": "su área de cobertura, las fuentes institucionales y los movimientos de los actores clave.",
+        "value": "temas para la redacción antes que la competencia, y una newsletter, sección premium o informe patrocinado con su propia marca.",
+        "plan": "Profesional."
+      },
+      {
+        "slug": "consultoras",
+        "name": "Consultoras",
+        "headline": "Ofrezca inteligencia recurrente a sus clientes, con su marca.",
+        "watches": "el entorno de cada cliente: mercado, regulación y competencia.",
+        "value": "convierte proyectos puntuales en un servicio mensual. Un vigilante por cliente, informes con la identidad de la consultora y los equipos del cliente como lectores.",
+        "plan": "Profesional, con créditos adicionales a medida que sume clientes; Observatorio a partir de tres clientes."
+      },
+      {
+        "slug": "think-tanks",
+        "name": "Think tanks y centros de pensamiento",
+        "headline": "Una agenda de investigación alimentada por datos, no por intuiciones.",
+        "watches": "política pública, literatura académica, otros think tanks y señales débiles por eje temático.",
+        "value": "informes institucionales periódicos, material para publicaciones y debates, y un vigilante por cada red o comunidad que anime.",
+        "plan": "Observatorio."
+      },
+      {
+        "slug": "observatorios-de-destino",
+        "name": "Observatorios de destino",
+        "headline": "El observatorio turístico de su destino, siempre al día.",
+        "watches": "demanda, oferta, movilidad, sostenibilidad, reputación y competencia entre destinos.",
+        "value": "informes periódicos para la gestión del destino y para el sector local, con las empresas del territorio como lectores.",
+        "plan": "Observatorio."
+      },
+      {
+        "slug": "administraciones",
+        "name": "Administraciones y organismos públicos",
+        "headline": "Política pública informada por lo que pasa, no por lo que se intuye.",
+        "watches": "cambios normativos, iniciativas de otras administraciones, financiación y tendencias de su sector o territorio.",
+        "value": "informes para decisores y equipos técnicos, vigilancia de riesgos y oportunidades, y material de contexto para estudios, informes anuales y jornadas.",
+        "hiring": "contrato anual adaptado a la vía de contratación de su organismo, con factura electrónica y revisión humana de cada informe antes de publicar.",
+        "plan": "Observatorio."
+      },
+      {
+        "slug": "empresas",
+        "name": "Empresas",
+        "headline": "Vea venir los cambios de su mercado.",
+        "watches": "tendencias, competidores, clientes, regulación y oportunidades de su sector.",
+        "value": "decisiones estratégicas y comerciales con información al día, y un resumen periódico para dirección.",
+        "plan": "Profesional."
+      },
+      {
+        "slug": "gremios",
+        "name": "Gremios, asociaciones y cámaras de comercio",
+        "headline": "Un servicio de inteligencia que sus asociados valoran cada mes.",
+        "watches": "el sector que representan y todo lo que afecta a sus asociados.",
+        "value": "suma valor a la cuota de socio: los asociados entran como lectores y los informes refuerzan su papel de interlocutor.",
+        "plan": "Profesional u Observatorio, según el número de asociados."
+      },
+      {
+        "slug": "universidades",
+        "name": "Universidades y centros de investigación",
+        "headline": "Del estado del arte a la transferencia, sin perder el hilo.",
+        "watches": "publicaciones, convocatorias, política científica y aplicaciones de su campo.",
+        "value": "grupos de investigación sobre la misma vigilancia, material docente y detección de financiación.",
+        "plan": "Profesional por grupo de investigación."
+      },
+      {
+        "slug": "agencias",
+        "name": "Agencias de comunicación y marketing",
+        "headline": "Ideas y argumentos para sus clientes, antes de que las pidan.",
+        "watches": "los temas, la conversación y la competencia del sector de cada cliente.",
+        "value": "contenidos apoyados en tendencias reales y un informe periódico como servicio añadido a cada contrato.",
+        "plan": "Profesional, con un vigilante por cliente."
+      },
+      {
+        "slug": "eventos",
+        "name": "Organizadores de eventos, ferias y congresos",
+        "headline": "Programe lo que su sector va a querer escuchar.",
+        "watches": "temas emergentes, ponentes y organizaciones de referencia, y otros eventos del sector.",
+        "value": "programación con criterio y un informe de tendencias para asistentes o patrocinadores. Para convertir lo que ocurre en el propio evento en conocimiento, consulte Voralis Congress.",
+        "plan": "Profesional."
+      },
+      {
+        "slug": "inversores",
+        "name": "Inversores y entidades financieras",
+        "headline": "Señales sectoriales para invertir y financiar con menos incertidumbre.",
+        "watches": "la evolución de los sectores de su cartera, cambios regulatorios y movimientos de los actores.",
+        "value": "análisis previo a la inversión, seguimiento de la cartera y detección temprana de riesgos, también como servicio para sus propios clientes.",
+        "plan": "Profesional u Observatorio."
+      }
+    ]
+  },
+  "Hero": {
+    "eyebrow": "Inteligencia de negocio para anticiparse",
+    "headline": {
+      "lead": "Convierta la información de su entorno en",
+      "emphasis": "inteligencia para decidir mejor."
+    },
+    "subheadline": "Voralis Vigilante lee cada día las fuentes que importan en su sector, filtra el ruido y le entrega señales, alertas e informes con contexto y fuente, revisados por personas antes de publicarse.",
+    "note": "Configuramos su vigilante con usted. Primer radar en días."
+  },
+  "Problem": {
+    "eyebrow": "El punto de partida",
+    "headline": "Su sector publica más de lo que su equipo puede leer.",
+    "lead": "La información que importa está repartida entre medios especializados, organismos oficiales, estudios, think tanks y publicaciones del sector. El problema no es encontrarla: es saber qué importa, entender el contexto y enterarse a tiempo.",
+    "pillars": [
+      { "id": "reunir", "title": "Reunir", "body": "Hasta 150 fuentes de su sector en un solo radar." },
+      { "id": "entender", "title": "Entender", "body": "Cada pieza puntuada por su relevancia para usted, con resumen y enlace a la fuente." },
+      { "id": "anticipar", "title": "Anticipar", "body": "Señales débiles y tendencias antes de que sean titulares." }
+    ]
+  },
+  "Capabilities": {
+    "eyebrow": "Para qué y para quién",
+    "headline": "Una misma inteligencia, al servicio de su organización.",
+    "footerWithVigilante": "Con Voralis Vigilante",
+    "items": [
+      { "id": "inteligencia-mercado", "title": "Inteligencia de mercado", "body": "Tendencias, movimientos de sus competidores, regulación y oportunidades de su mercado." },
+      { "id": "vigilancia-sectorial", "title": "Vigilancia sectorial", "body": "Fuentes especializadas en español e inglés, ordenadas por ejes y sectores, sin ruido." },
+      { "id": "alertas", "title": "Alertas a tiempo", "body": "Lo importante llega a su correo con la frecuencia que usted elija." },
+      { "id": "informes", "title": "Informes para decidir o publicar", "body": "Largo o Resumen, con su identidad visual y en seis idiomas, revisados antes de publicar." },
+      { "id": "reputacion", "title": "Reputación", "body": "Qué se dice de su organización y cómo evoluciona la percepción.", "badge": "Próximamente · Voralis Pulse" }
+    ],
+    "audience": {
+      "title": "Para quién",
+      "items": [
+        { "slug": "medios", "label": "Medios" },
+        { "slug": "consultoras", "label": "Consultoras" },
+        { "slug": "think-tanks", "label": "Think tanks" },
+        { "slug": "observatorios-de-destino", "label": "Observatorios de destino" },
+        { "slug": "administraciones", "label": "Administraciones públicas" },
+        { "slug": "empresas", "label": "Empresas" },
+        { "slug": "gremios", "label": "Gremios y asociaciones" },
+        { "slug": "universidades", "label": "Universidades" },
+        { "slug": "agencias", "label": "Agencias de comunicación" },
+        { "slug": "eventos", "label": "Organizadores de eventos" },
+        { "slug": "inversores", "label": "Inversores" }
+      ],
+      "line": "¿Quiere ofrecer inteligencia a sus propios clientes? Voralis le permite convertirla en un servicio con su marca."
+    }
+  },
+  "Impact": {
+    "eyebrow": "Resultados",
+    "headline": "Lo que hace Voralis cada día, en cifras.",
+    "howItIsCalculated": "Cómo se calcula",
+    "metrics": [
+      { "id": "candidates", "label": "piezas candidatas por ciclo", "kind": "real", "value": "Más de 150" },
+      { "id": "published", "label": "piezas publicadas en la edición de julio", "kind": "real", "value": "37" },
+      { "id": "axes", "label": "ejes temáticos con representación en la edición de julio", "kind": "real", "value": "9 de 10" },
+      { "id": "frequency", "label": "de todas las fuentes", "kind": "real", "value": "Lectura diaria" },
+      { "id": "summary", "label": "Lectura del Resumen", "kind": "estimate", "value": "15–20 minutos" }
+    ],
+    "headlineEstimate": {
+      "value": "≈ 25 horas",
+      "unit": "de lectura",
+      "claim": "cubiertas en cada revisión completa de sus fuentes.",
+      "formula": "150 fuentes × 10 minutos = 1.500 minutos ≈ 25 horas"
+    }
+  },
+  "Cases": {
+    "eyebrow": "Casos",
+    "headline": "Redes que ya publican con Voralis.",
+    "lead": "Organizaciones que usan Voralis y publican sus informes. Cada informe lo publica su autor en su propia web."
+  },
+  "HowItWorks": {
+    "eyebrow": "Cómo funciona",
+    "headline": "De cientos de fuentes a un informe revisado, en un solo recorrido.",
+    "journeyTitle": "El recorrido",
+    "onboardingTitle": "Cómo es el alta",
+    "videoMarkerNote": "Vídeo del alta de Voralis Vigilante",
+    "vigilante": "Voralis Vigilante",
+    "guarantee": "Si en los primeros 30 días la primera cosecha no cumple lo que acordamos por escrito, le devolvemos el primer mes.",
+    "steps": [
+      { "id": "fuentes", "title": "Fuentes públicas", "body": "Medios, organismos, estudios y publicaciones de su sector." },
+      { "id": "lectura", "title": "Lectura diaria", "body": "El vigilante lee, filtra y puntúa cada pieza según lo que a usted le importa." },
+      { "id": "radar", "title": "Radar y noticias", "body": "Lo relevante, ordenado por ejes y sectores, para consultar cada día." },
+      { "id": "borrador", "title": "Borrador del informe", "body": "La inteligencia artificial redacta el informe completo." },
+      { "id": "revision", "title": "Revisión humana", "body": "Su equipo lo edita y lo aprueba antes de publicar. Puede pedir cambios al asistente con sus propias palabras." },
+      { "id": "versiones", "title": "Versiones, Largo y Resumen", "body": "El mismo texto revisado, en hasta seis idiomas: español, inglés, francés, alemán, portugués e italiano. Con su identidad visual, gráficos e imágenes." }
+    ],
+    "onboarding": {
+      "steps": [
+        "Nos cuenta qué quiere vigilar",
+        "Preparamos su perfil antes de la primera reunión",
+        "Lo ajustamos con usted",
+        "Primer radar en días"
+      ]
+    },
+    "minor": [
+      { "id": "pulse", "name": "Voralis Pulse", "status": "Próximamente", "body": "Entienda qué se dice de su organización y cómo evoluciona la conversación.", "cta": "Avisarme cuando esté disponible" },
+      { "id": "congress", "name": "Voralis Congress", "status": "Bajo consulta", "body": "Convierte eventos y congresos en conocimiento: lo que se dijo, quién lo dijo y qué queda para después.", "cta": "Hablar con ventas" }
+    ],
+    "trust": {
+      "body": "Fuentes públicas, análisis con IA y revisión humana. Cada informe identifica el contenido generado con IA.",
+      "tags": ["Reglamento europeo de IA", "RGPD"]
+    }
+  },
+  "FinalCta": {
+    "headline": "Entienda mejor lo que está pasando.",
+    "lead": "Cuéntenos qué necesita vigilar. Preparamos su perfil y se lo presentamos en la primera reunión."
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Página no encontrada",
+    "body": "La ruta que buscas no existe o se ha movido. Vuelve al inicio para seguir explorando.",
+    "actions": {
+      "goHome": "Volver al inicio",
+      "contact": "Contacto"
+    }
+  },
+  "Pricing": {
+    "headline": "Empiece viendo cómo trabaja. Crezca cuando lo necesite.",
+    "selectors": {
+      "billing": {
+        "label": "Facturación",
+        "monthly": "Mensual",
+        "annual": "Anual (dos meses gratis)"
+      },
+      "currency": { "label": "Moneda" }
+    },
+    "monthlyAnnualHint": "El selector Mensual / Anual afecta solo al plan Profesional.",
+    "plans": {
+      "explorer": {
+        "name": "Explorador",
+        "price": "Gratis",
+        "audience": "Para ver cómo trabaja Voralis antes de hablar con nosotros.",
+        "features": [
+          "Demo con datos reales",
+          "Vídeo del alta",
+          "Catálogo de informes de nuestros clientes",
+          "Aviso por correo de nuevas ediciones"
+        ]
+      },
+      "professional": {
+        "name": "Profesional",
+        "badge": "Recomendado para equipos",
+        "audience": "Para equipos que vigilan su propio entorno.",
+        "monthly": { "amount": "449", "unit": "al mes" },
+        "annual": { "amount": "4.490", "unit": "al año" },
+        "features": [
+          "**250 créditos al mes**, que alcanzan para un vigilante con uso completo o para dos con uso ligero",
+          "Hasta 5 vigilantes, configurados con usted",
+          "Hasta 150 fuentes y 3 competidores por vigilante",
+          "Fuentes en español e inglés; informes en hasta seis idiomas",
+          "Informes Largo y Resumen con su identidad visual, revisados por su equipo antes de publicar",
+          "3 administradores y 25 lectores",
+          "Asistente de IA y edición asistida de informes",
+          "Alertas diarias o semanales · descarga en PDF y CSV"
+        ],
+        "fineprint": "{4.490} al año. Alta: {490}, pago único; incluye la preparación de su perfil, una reunión de presentación y una ronda de ajustes. Garantía de devolución del primer mes."
+      },
+      "observatory": {
+        "name": "Observatorio",
+        "price": { "prefix": "Desde", "amount": "1.500", "unit": "al mes" },
+        "audience": "Para instituciones que informan a todo un sector o territorio.",
+        "features": [
+          "**1.000 créditos al mes**",
+          "Vigilantes sin tope, con ejes y sectores propios",
+          "Más de 150 fuentes y 10 competidores por vigilante",
+          "Calidad de imagen alta y auditoría nuestra antes de publicar",
+          "250 lectores y administradores a medida",
+          "Recalibración trimestral y gestor dedicado",
+          "Contrato anual con nivel de servicio pactado"
+        ],
+        "note": "¿Es usted una administración pública? Le ofrecemos un contrato anual adaptado a la vía de contratación de su organismo."
+      }
+    },
+    "credit": {
+      "title": "Qué es un crédito",
+      "body": "Cada plan incluye una bolsa de créditos al mes. Cada vigilante activo usa una parte fija, y el resto se reparte entre informes, versiones en otros idiomas y el asistente, según lo que usted necesite. Si se queda corto, puede comprar más en cualquier momento. La lectura diaria de sus fuentes nunca se detiene."
+    },
+    "addons": {
+      "title": "Complementos",
+      "items": [
+        { "name": "100 créditos", "price": "{149}, válidos doce meses" },
+        { "name": "500 créditos", "price": "{649}, válidos doce meses" },
+        { "name": "Alta de un vigilante nuevo", "price": "{290}" },
+        { "name": "25 lectores más", "price": "{39} al mes" },
+        { "name": "Un administrador más", "price": "{19} al mes" },
+        { "name": "Lectores de difusión", "price": "100 por {99} al mes · 500 por {399} al mes" },
+        { "name": "Consultoría de configuración", "price": "{90} la hora · 4 horas por {320}" },
+        { "name": "Informe auditado por un analista", "price": "{290} por informe" }
+      ],
+      "fineprint": "Impuestos no incluidos. Las condiciones de la garantía y de los créditos están en las condiciones del servicio."
+    }
+  }
+}

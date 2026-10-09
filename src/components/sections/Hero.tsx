@@ -1,8 +1,8 @@
+import { getTranslations } from "next-intl/server";
 import { IntelligenceDashboard } from "@/components/hero/IntelligenceDashboard";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { hero } from "@/content/home";
 
 /**
  * BLOQUE 01 — HERO
@@ -19,7 +19,10 @@ import { hero } from "@/content/home";
  *   Tampoco lleva `Reveal` — animar la entrada de lo que ya está en pantalla
  *   solo retrasa la lectura del mensaje principal.
  */
-export function Hero() {
+export async function Hero() {
+  const t = await getTranslations("Hero");
+  const tActions = await getTranslations("Actions");
+
   return (
     <section
       id="inicio"
@@ -40,31 +43,31 @@ export function Hero() {
         <div className="grid items-center gap-14 py-16 sm:py-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:py-24">
           {/* ---- Columna de mensaje ---------------------------------- */}
           <div>
-            <Eyebrow withDot>{hero.eyebrow}</Eyebrow>
+            <Eyebrow withDot>{t("eyebrow")}</Eyebrow>
 
             <h1
               id="hero-title"
               tabIndex={-1}
               className="mt-4 max-w-[22ch] text-balance outline-none text-display font-bold text-fg"
             >
-              {hero.headline.lead}{" "}
-              <span className="text-accent">{hero.headline.emphasis}</span>
+              {t("headline.lead")}{" "}
+              <span className="text-accent">{t("headline.emphasis")}</span>
             </h1>
 
             <p className="mt-5 max-w-[38rem] text-pretty text-lg leading-relaxed text-muted sm:text-[1.1875rem]">
-              {hero.subheadline}
+              {t("subheadline")}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={hero.primaryCta.href} trailingArrow>
-                {hero.primaryCta.label}
+              <Button href="/solicitar-alta" trailingArrow>
+                {tActions("requestOnboarding")}
               </Button>
-              <Button href={hero.secondaryCta.href} variant="secondary">
-                {hero.secondaryCta.label}
+              <Button href="/demo" variant="secondary">
+                {tActions("viewDemo")}
               </Button>
             </div>
 
-            <p className="mt-5 text-sm text-muted">{hero.note}</p>
+            <p className="mt-5 text-sm text-muted">{t("note")}</p>
           </div>
 
           {/* ---- Columna visual -------------------------------------- */}

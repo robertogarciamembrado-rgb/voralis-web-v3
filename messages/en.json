@@ -1,0 +1,612 @@
+{
+  "Common": {
+    "skipToContent": "Skip to content",
+    "viewCatalog": "View catalog",
+    "available": "Available",
+    "soon": "Coming soon",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "changeLanguage": "Change language",
+    "requiredMark": "(required)",
+    "selectOption": "Select an option",
+    "externalLinkNotice": "External link",
+    "newTab": "opens in a new tab",
+    "homeLinkAriaLabel": "Voralis — Home",
+    "theme": {
+      "changeToLight": "Switch to light theme",
+      "changeToDark": "Switch to dark theme",
+      "changeTheme": "Change theme"
+    },
+    "dataKind": {
+      "real": "Real data",
+      "estimate": "Estimate",
+      "target": "Design target"
+    },
+    "carousel": {
+      "ariaLabel": "Networks publishing with Voralis",
+      "previous": "Previous network",
+      "next": "Next network",
+      "selectNetwork": "Select network",
+      "goToNetwork": "Go to network {index}",
+      "slideLabel": "{index} of {total}: {name}"
+    }
+  },
+  "Site": {
+    "name": "Voralis",
+    "title": "Voralis — Business intelligence to stay ahead",
+    "titleTemplate": "{title} · Voralis",
+    "description": "Voralis Watcher reads every day the sources that matter in your sector, filters the noise and delivers signals, alerts and reports with context and source, reviewed by people before publishing.",
+    "openGraphDescription": "Turn the information around you into intelligence to make better decisions."
+  },
+  "Nav": {
+    "mainAriaLabel": "Main navigation",
+    "mainMobileAriaLabel": "Main navigation (mobile)",
+    "whatIs": "What is Voralis",
+    "forWhom": "Who it is for",
+    "results": "Results",
+    "howItWorks": "How it works",
+    "pricing": "Pricing",
+    "catalog": "Catalog"
+  },
+  "Footer": {
+    "linksAriaLabel": "Legal links and contact",
+    "tagline": "Voralis turns the information around you into intelligence to make better decisions.",
+    "legalNotice": "Legal notice",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "aiUse": "AI use",
+    "cookies": "Cookies",
+    "contact": "Contact",
+    "copyright": "© {entity} · Voralis is a trademark licensed to {entity}"
+  },
+  "Actions": {
+    "requestOnboarding": "Request onboarding",
+    "viewDemo": "View the demo",
+    "contactSales": "Talk to sales"
+  },
+  "Legal": {
+    "titles": {
+      "aviso-legal": "Legal notice",
+      "privacidad": "Privacy",
+      "condiciones": "Terms",
+      "uso-de-ia": "AI use",
+      "cookies": "Cookies"
+    },
+    "placeholder": "Provisional legal text. The final text is pending legal validation and will be published here."
+  },
+  "Catalog": {
+    "title": "Reports from our clients.",
+    "lead": "Organisations that use Voralis and publish their reports. Each report is published by its author on their own website.",
+    "footer": "Would you like your report to appear here?",
+    "watchesLabel": "What it watches",
+    "audienceLabel": "Who it is for",
+    "summaryLabel": "Summary",
+    "exitNotice": "You are about to leave Voralis. This report is published by {network} on their website. Voralis does not host or serve the report.",
+    "exitActions": {
+      "continue": "Continue",
+      "cancel": "Cancel"
+    },
+    "networks": [
+      {
+        "id": "tstt",
+        "name": "Tourism & Society Think Tank",
+        "mark": "TSTT",
+        "color": "#0f766e",
+        "report": "Tourism Intelligence Report",
+        "watches": "Trends, social, economic and cultural impact, and sustainability of tourism",
+        "audience": "Tourism professionals, companies and institutions",
+        "summary": "Tourism and society · 10 axes · 11 sectors",
+        "languages": "ES · EN",
+        "status": "Monthly · Latest: July 2026",
+        "cta": "View report",
+        "available": true,
+        "href": {
+          "es": "https://esp.tourismandsocietytt.com/noticias-y-newsletter/2026/2026-octubre/ultimas-noticias/tstt-presenta-un-nuevo-informe-mensual-de-inteligencia-tur%C3%ADstica-para-compr",
+          "en": "https://www.tourismandsocietytt.com/news-and-newsletter/2026/2026-october/ultimas-noticias/tstt-launches-a-new-monthly-tourism-intelligence-report-to-understand-the-e"
+        }
+      },
+      {
+        "id": "wrtn",
+        "name": "World Religious Tourism Network",
+        "mark": "WRTN",
+        "color": "#7c3aed",
+        "report": "Religious and spiritual tourism radar",
+        "watches": "Destinations, organisations, companies and experts in religious and spiritual tourism",
+        "audience": "Destinations, organisations and professionals from Europe and the Americas",
+        "summary": "Destinations, heritage and faith communities",
+        "languages": "ES · EN",
+        "status": "Coming soon · first edition",
+        "cta": "Discover the network",
+        "available": false,
+        "href": {
+          "es": "https://www.tourismandsocietytt.com/world-religious-tourism-network",
+          "en": "https://www.tourismandsocietytt.com/world-religious-tourism-network"
+        }
+      },
+      {
+        "id": "wctn",
+        "name": "World Cacao Tourism Network",
+        "mark": "WCTN",
+        "color": "#b45309",
+        "report": "Cacao tourism radar",
+        "watches": "Destinations and producing countries, experiences around cacao, sustainability and local heritage",
+        "audience": "Destinations, producers, operators, universities and local communities",
+        "summary": "Producing destinations, culture and experiences",
+        "languages": "ES · EN",
+        "status": "Coming soon · first edition",
+        "cta": "Discover the network",
+        "available": false,
+        "href": {
+          "es": "https://www.tourismandsocietytt.com/world-cacao-tourism-network",
+          "en": "https://www.tourismandsocietytt.com/world-cacao-tourism-network"
+        }
+      }
+    ]
+  },
+  "Demo": {
+    "title": "This is how a Voralis watcher works.",
+    "lead": "This is a sample edition with real data from the Tourism & Society Think Tank watcher. Explore the radar and news as your team sees them.",
+    "label": "Sample edition · {date}",
+    "blocks": {
+      "radar": "Radar",
+      "news": "Relevant news",
+      "thumbnails": "Report thumbnails",
+      "video": "Onboarding video"
+    },
+    "pending": "Sample edition content pending export.",
+    "aiNote": "Summaries are produced with artificial intelligence from public sources and reviewed by people.",
+    "closing": "Would you like a radar like this for your organisation?"
+  },
+  "Signup": {
+    "title": "Tell us what you need to watch.",
+    "lead": "Leave us your website. Our system analyses how your organisation presents itself and prepares a first scan, which we will show you at the meeting to fine-tune it with you.",
+    "fields": {
+      "web": {
+        "label": "Your organisation's website",
+        "help": "It can be your main website or the page that best describes your organisation or network."
+      },
+      "tipo": { "label": "Type of organisation" },
+      "nombre": { "label": "Name and surname" },
+      "cargo": { "label": "Role" },
+      "correo": { "label": "Email" },
+      "telefono": { "label": "Phone" },
+      "competidores": {
+        "label": "Competitors or benchmarks",
+        "help": "Websites of organisations you compare yourself to or want to follow closely.",
+        "addButton": "Add another"
+      },
+      "prioridades": {
+        "label": "What would you like to watch or what concerns you?",
+        "maxLength": 500
+      }
+    },
+    "tiposOrganizacion": [
+      { "value": "medio", "label": "Media outlet" },
+      { "value": "consultora", "label": "Consultancy" },
+      { "value": "think_tank", "label": "Think tank or research centre" },
+      { "value": "observatorio_destino", "label": "Destination observatory" },
+      { "value": "administracion", "label": "Public administration or body" },
+      { "value": "empresa", "label": "Company" },
+      { "value": "gremio", "label": "Association, guild or chamber of commerce" },
+      { "value": "universidad", "label": "University or research centre" },
+      { "value": "agencia", "label": "Communications or marketing agency" },
+      { "value": "eventos", "label": "Event, fair or congress organiser" },
+      { "value": "inversor", "label": "Investor or financial entity" }
+    ],
+    "submit": "Request onboarding",
+    "submitting": "Sending…",
+    "note": "There is no commitment until you accept the proposal.",
+    "existingAccount": {
+      "prompt": "Already have an account?",
+      "linkLabel": "Log in",
+      "href": "https://vigilante.avia-global.com"
+    },
+    "confirmation": {
+      "title": "Thank you.",
+      "text": "We are analysing how your organisation presents itself on the web. We will write to schedule the meeting where we show you the result."
+    },
+    "errorFallback": "We could not send your request. Please try again or write to us from the Contact page.",
+    "errors": {
+      "required": "This field is required.",
+      "url": "Please enter a valid web address, for example www.yourorganisation.com.",
+      "email": "Please enter a valid email address.",
+      "privacy": "To continue, accept the privacy policy."
+    },
+    "consent": {
+      "privacyPrefix": "I accept the ",
+      "privacyLinkText": "privacy policy",
+      "privacyLinkHref": "/legal/privacidad",
+      "privacySuffix": " and that Voralis analyses with artificial intelligence the public information on the indicated websites to prepare my proposal.",
+      "communications": "I want to receive news and commercial information from Voralis."
+    }
+  },
+  "Contact": {
+    "title": "Let's talk.",
+    "lead": "For Observatory plans, public administrations, Voralis Congress or any query.",
+    "reasons": [
+      { "value": "observatorio", "label": "Observatory" },
+      { "value": "administracion", "label": "Public administration" },
+      { "value": "congress", "label": "Voralis Congress" },
+      { "value": "pulse", "label": "Voralis Pulse waiting list" },
+      { "value": "otro", "label": "Other" }
+    ],
+    "fields": {
+      "nombre": "Name",
+      "organizacion": "Organisation",
+      "correo": "Email",
+      "motivo": "Reason",
+      "mensaje": "Message"
+    },
+    "mensajePulseHelp": "We will email you when Voralis Pulse becomes available.",
+    "submit": "Talk to sales",
+    "submitting": "Sending…",
+    "confirmation": {
+      "title": "Thank you.",
+      "text": "We will get back to you as soon as possible.",
+      "textPulse": "We will let you know as soon as Voralis Pulse is available."
+    },
+    "errorFallback": "We could not send your message. Please try again or write to us directly.",
+    "errors": {
+      "required": "This field is required.",
+      "email": "Please enter a valid email address.",
+      "privacy": "To continue, accept the privacy policy."
+    },
+    "consent": {
+      "privacyPrefix": "I accept the ",
+      "privacyLinkText": "privacy policy",
+      "privacyLinkHref": "/legal/privacidad",
+      "privacySuffix": " and that Voralis uses my data to answer my query.",
+      "communications": "I want to receive news and commercial information from Voralis."
+    }
+  },
+  "FAQ": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "q": "What is a watcher?",
+        "a": "An intelligence engine configured for your topic: a profile, sectors, thematic axes and a list of sources. Every day it reads what is published, scores it by relevance and delivers only what matters."
+      },
+      {
+        "q": "Where does the information come from?",
+        "a": "From public sources: sector media, official bodies, universities, think tanks and reference organisations. Each piece links to its original source."
+      },
+      {
+        "q": "What role does artificial intelligence play?",
+        "a": "It classifies, scores and summarises the information, and drafts each report. Before publishing, a person reviews and approves it. All AI-generated content is identified as such."
+      },
+      {
+        "q": "How does onboarding work?",
+        "a": "You tell us what you want to watch and we prepare your profile before the first meeting. At that meeting we fine-tune it with you. Daily reading starts on the activation day and the first radar arrives within days."
+      },
+      {
+        "q": "What if the result does not match what we agreed?",
+        "a": "If during the first 30 days the first harvest does not meet what we agreed in writing, we refund your first month. Your configuration is yours and you can take it with you."
+      },
+      {
+        "q": "What are credits?",
+        "a": "Each plan includes a monthly pool of credits. Each active watcher uses a fixed share, and the rest is split between reports, versions in other languages and the assistant. If you run short, you can buy more. Daily reading of your sources never stops because of a lack of credits."
+      },
+      {
+        "q": "In which languages are the reports?",
+        "a": "Sources are read in Spanish and English. The report is written in Spanish or English, and can have reviewed versions in French, German, Portuguese and Italian."
+      },
+      {
+        "q": "Can I change what I watch?",
+        "a": "Yes. Your administrators adjust sources, keywords, axes and sectors whenever they need to, within their plan."
+      },
+      {
+        "q": "Who in my team can log in?",
+        "a": "Administrators configure and manage. Readers have one of four levels: query, reports, analyst or curator."
+      },
+      {
+        "q": "Can I share the reports outside my organisation?",
+        "a": "Yes. You can publish them on your website or give access to external readers, and decide whether to charge them."
+      },
+      {
+        "q": "Can a public administration contract Voralis?",
+        "a": "Yes. We offer an annual contract adapted to the procurement procedure of each body, with electronic invoicing and human review of each report before publishing."
+      },
+      {
+        "q": "Can I cancel?",
+        "a": "Yes. Monthly plans have no commitment. If you cancel, we keep your watchers frozen for 90 days in case you come back, and your configuration can be exported."
+      },
+      {
+        "q": "Are the reports in the catalog from Voralis?",
+        "a": "No. Each report is published by the organisation that produced it, on its own website, and is responsible for its content."
+      }
+    ]
+  },
+  "Solutions": {
+    "title": "One intelligence, eleven ways to put it to work.",
+    "labels": {
+      "watches": "What it watches",
+      "value": "How it creates value",
+      "hiring": "How to contract",
+      "plan": "Recommended plan"
+    },
+    "items": [
+      {
+        "slug": "medios",
+        "name": "Media outlets",
+        "headline": "Turn your sector's news into a product of your own.",
+        "watches": "your coverage area, institutional sources and the moves of the key players.",
+        "value": "topics for the newsroom ahead of the competition, and a newsletter, premium section or sponsored report under your own brand.",
+        "plan": "Professional."
+      },
+      {
+        "slug": "consultoras",
+        "name": "Consultancies",
+        "headline": "Offer recurring intelligence to your clients, under your own brand.",
+        "watches": "each client's environment: market, regulation and competition.",
+        "value": "turns one-off projects into a monthly service. One watcher per client, reports with the consultancy's identity and the client's teams as readers.",
+        "plan": "Professional, with additional credits as you add clients; Observatory from three clients."
+      },
+      {
+        "slug": "think-tanks",
+        "name": "Think tanks and research centres",
+        "headline": "A research agenda fuelled by data, not intuition.",
+        "watches": "public policy, academic literature, other think tanks and weak signals by thematic axis.",
+        "value": "periodic institutional reports, material for publications and debates, and one watcher for each network or community you run.",
+        "plan": "Observatory."
+      },
+      {
+        "slug": "observatorios-de-destino",
+        "name": "Destination observatories",
+        "headline": "Your destination's tourism observatory, always up to date.",
+        "watches": "demand, supply, mobility, sustainability, reputation and competition between destinations.",
+        "value": "periodic reports for destination management and the local sector, with local businesses as readers.",
+        "plan": "Observatory."
+      },
+      {
+        "slug": "administraciones",
+        "name": "Public administrations and bodies",
+        "headline": "Public policy informed by what is happening, not by what is guessed.",
+        "watches": "regulatory changes, initiatives from other administrations, funding and trends in your sector or territory.",
+        "value": "reports for decision-makers and technical teams, risk and opportunity monitoring, and context material for studies, annual reports and events.",
+        "hiring": "annual contract adapted to the procurement procedure of your body, with electronic invoicing and human review of each report before publishing.",
+        "plan": "Observatory."
+      },
+      {
+        "slug": "empresas",
+        "name": "Companies",
+        "headline": "See your market's changes coming.",
+        "watches": "trends, competitors, customers, regulation and opportunities in your sector.",
+        "value": "strategic and commercial decisions backed by up-to-date information, and a periodic summary for management.",
+        "plan": "Professional."
+      },
+      {
+        "slug": "gremios",
+        "name": "Associations, guilds and chambers of commerce",
+        "headline": "An intelligence service your members value every month.",
+        "watches": "the sector they represent and everything that affects their members.",
+        "value": "adds value to the membership fee: members log in as readers and the reports reinforce the association's role as interlocutor.",
+        "plan": "Professional or Observatory, depending on the number of members."
+      },
+      {
+        "slug": "universidades",
+        "name": "Universities and research centres",
+        "headline": "From the state of the art to transfer, without losing the thread.",
+        "watches": "publications, calls, science policy and applications of your field.",
+        "value": "research groups on the same watch, teaching material and funding opportunities detection.",
+        "plan": "Professional per research group."
+      },
+      {
+        "slug": "agencias",
+        "name": "Communications and marketing agencies",
+        "headline": "Ideas and arguments for your clients, before they ask for them.",
+        "watches": "the topics, conversation and competition of each client's sector.",
+        "value": "content backed by real trends and a periodic report as an added value to each contract.",
+        "plan": "Professional, with one watcher per client."
+      },
+      {
+        "slug": "eventos",
+        "name": "Event, fair and congress organisers",
+        "headline": "Programme what your sector is going to want to hear.",
+        "watches": "emerging topics, speakers and reference organisations, and other sector events.",
+        "value": "curated programming and a trends report for attendees or sponsors. To turn what happens at the event itself into knowledge, see Voralis Congress.",
+        "plan": "Professional."
+      },
+      {
+        "slug": "inversores",
+        "name": "Investors and financial entities",
+        "headline": "Sector signals to invest and finance with less uncertainty.",
+        "watches": "the evolution of your portfolio's sectors, regulatory changes and player moves.",
+        "value": "pre-investment analysis, portfolio monitoring and early risk detection, also as a service for your own clients.",
+        "plan": "Professional or Observatory."
+      }
+    ]
+  },
+  "Hero": {
+    "eyebrow": "Business intelligence to stay ahead",
+    "headline": {
+      "lead": "Turn the information around you into",
+      "emphasis": "intelligence to make better decisions."
+    },
+    "subheadline": "Voralis Watcher reads every day the sources that matter in your sector, filters the noise and delivers signals, alerts and reports with context and source, reviewed by people before publishing.",
+    "note": "We configure your watcher with you. First radar in days."
+  },
+  "Problem": {
+    "eyebrow": "The starting point",
+    "headline": "Your sector publishes more than your team can read.",
+    "lead": "The information that matters is spread across specialised media, official bodies, studies, think tanks and sector publications. The problem is not finding it: it is knowing what matters, understanding the context and hearing about it on time.",
+    "pillars": [
+      { "id": "reunir", "title": "Gather", "body": "Up to 150 sources from your sector in a single radar." },
+      { "id": "entender", "title": "Understand", "body": "Each piece scored by its relevance to you, with a summary and link to the source." },
+      { "id": "anticipar", "title": "Anticipate", "body": "Weak signals and trends before they make the headlines." }
+    ]
+  },
+  "Capabilities": {
+    "eyebrow": "What for and for whom",
+    "headline": "One intelligence, at the service of your organisation.",
+    "footerWithVigilante": "With Voralis Watcher",
+    "items": [
+      { "id": "inteligencia-mercado", "title": "Market intelligence", "body": "Trends, competitor moves, regulation and opportunities in your market." },
+      { "id": "vigilancia-sectorial", "title": "Sector watch", "body": "Specialised sources in Spanish and English, sorted by axes and sectors, with no noise." },
+      { "id": "alertas", "title": "Alerts on time", "body": "What matters lands in your inbox at the frequency you choose." },
+      { "id": "informes", "title": "Reports to decide or publish", "body": "Long or Summary, with your visual identity and in six languages, reviewed before publishing." },
+      { "id": "reputacion", "title": "Reputation", "body": "What is being said about your organisation and how the perception evolves.", "badge": "Coming soon · Voralis Pulse" }
+    ],
+    "audience": {
+      "title": "Who it is for",
+      "items": [
+        { "slug": "medios", "label": "Media" },
+        { "slug": "consultoras", "label": "Consultancies" },
+        { "slug": "think-tanks", "label": "Think tanks" },
+        { "slug": "observatorios-de-destino", "label": "Destination observatories" },
+        { "slug": "administraciones", "label": "Public administrations" },
+        { "slug": "empresas", "label": "Companies" },
+        { "slug": "gremios", "label": "Associations and chambers" },
+        { "slug": "universidades", "label": "Universities" },
+        { "slug": "agencias", "label": "Communications agencies" },
+        { "slug": "eventos", "label": "Event organisers" },
+        { "slug": "inversores", "label": "Investors" }
+      ],
+      "line": "Want to offer intelligence to your own clients? Voralis lets you turn it into a service under your own brand."
+    }
+  },
+  "Impact": {
+    "eyebrow": "Results",
+    "headline": "What Voralis does every day, in numbers.",
+    "howItIsCalculated": "How it is calculated",
+    "metrics": [
+      { "id": "candidates", "label": "candidate pieces per cycle", "kind": "real", "value": "Over 150" },
+      { "id": "published", "label": "pieces published in the July edition", "kind": "real", "value": "37" },
+      { "id": "axes", "label": "thematic axes represented in the July edition", "kind": "real", "value": "9 of 10" },
+      { "id": "frequency", "label": "of all sources", "kind": "real", "value": "Daily reading" },
+      { "id": "summary", "label": "Summary reading", "kind": "estimate", "value": "15–20 minutes" }
+    ],
+    "headlineEstimate": {
+      "value": "≈ 25 hours",
+      "unit": "of reading",
+      "claim": "covered in each full review of your sources.",
+      "formula": "150 sources × 10 minutes = 1,500 minutes ≈ 25 hours"
+    }
+  },
+  "Cases": {
+    "eyebrow": "Cases",
+    "headline": "Networks already publishing with Voralis.",
+    "lead": "Organisations that use Voralis and publish their reports. Each report is published by its author on their own website."
+  },
+  "HowItWorks": {
+    "eyebrow": "How it works",
+    "headline": "From hundreds of sources to a reviewed report, in a single journey.",
+    "journeyTitle": "The journey",
+    "onboardingTitle": "How onboarding works",
+    "videoMarkerNote": "Voralis Watcher onboarding video",
+    "vigilante": "Voralis Watcher",
+    "guarantee": "If during the first 30 days the first harvest does not meet what we agreed in writing, we refund your first month.",
+    "steps": [
+      { "id": "fuentes", "title": "Public sources", "body": "Media, bodies, studies and publications from your sector." },
+      { "id": "lectura", "title": "Daily reading", "body": "The watcher reads, filters and scores each piece by what matters to you." },
+      { "id": "radar", "title": "Radar and news", "body": "What is relevant, ordered by axes and sectors, to consult every day." },
+      { "id": "borrador", "title": "Report draft", "body": "The artificial intelligence drafts the full report." },
+      { "id": "revision", "title": "Human review", "body": "Your team edits and approves it before publishing. You can ask the assistant for changes in your own words." },
+      { "id": "versiones", "title": "Versions, Long and Summary", "body": "The same reviewed text in up to six languages: Spanish, English, French, German, Portuguese and Italian. With your visual identity, charts and images." }
+    ],
+    "onboarding": {
+      "steps": [
+        "You tell us what you want to watch",
+        "We prepare your profile before the first meeting",
+        "We fine-tune it with you",
+        "First radar in days"
+      ]
+    },
+    "minor": [
+      { "id": "pulse", "name": "Voralis Pulse", "status": "Coming soon", "body": "Understand what is being said about your organisation and how the conversation evolves.", "cta": "Notify me when available" },
+      { "id": "congress", "name": "Voralis Congress", "status": "On request", "body": "Turn events and congresses into knowledge: what was said, who said it and what remains for afterwards.", "cta": "Talk to sales" }
+    ],
+    "trust": {
+      "body": "Public sources, AI analysis and human review. Each report identifies AI-generated content.",
+      "tags": ["European AI Act", "GDPR"]
+    }
+  },
+  "FinalCta": {
+    "headline": "Better understand what is happening.",
+    "lead": "Tell us what you need to watch. We prepare your profile and present it at the first meeting."
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has moved. Go back to the home page to keep exploring.",
+    "actions": {
+      "goHome": "Back to home",
+      "contact": "Contact"
+    }
+  },
+  "Pricing": {
+    "headline": "Start by seeing how it works. Grow when you need to.",
+    "selectors": {
+      "billing": {
+        "label": "Billing",
+        "monthly": "Monthly",
+        "annual": "Annual (two months free)"
+      },
+      "currency": { "label": "Currency" }
+    },
+    "monthlyAnnualHint": "The Monthly / Annual selector only affects the Professional plan.",
+    "plans": {
+      "explorer": {
+        "name": "Explorer",
+        "price": "Free",
+        "audience": "To see how Voralis works before talking to us.",
+        "features": [
+          "Demo with real data",
+          "Onboarding video",
+          "Catalog of reports from our clients",
+          "Email notice of new editions"
+        ]
+      },
+      "professional": {
+        "name": "Professional",
+        "badge": "Recommended for teams",
+        "audience": "For teams watching their own environment.",
+        "monthly": { "amount": "449", "unit": "per month" },
+        "annual": { "amount": "4,490", "unit": "per year" },
+        "features": [
+          "**250 credits per month**, enough for one watcher with full use or for two with light use",
+          "Up to 5 watchers, configured with you",
+          "Up to 150 sources and 3 competitors per watcher",
+          "Sources in Spanish and English; reports in up to six languages",
+          "Long and Summary reports with your visual identity, reviewed by your team before publishing",
+          "3 administrators and 25 readers",
+          "AI assistant and assisted report editing",
+          "Daily or weekly alerts · PDF and CSV download"
+        ],
+        "fineprint": "{4,490} per year. Onboarding: {490}, one-time payment; includes the preparation of your profile, a presentation meeting and one round of adjustments. First-month money-back guarantee."
+      },
+      "observatory": {
+        "name": "Observatory",
+        "price": { "prefix": "From", "amount": "1,500", "unit": "per month" },
+        "audience": "For institutions that inform an entire sector or territory.",
+        "features": [
+          "**1,000 credits per month**",
+          "Unlimited watchers, with custom axes and sectors",
+          "Over 150 sources and 10 competitors per watcher",
+          "High image quality and our audit before publishing",
+          "250 readers and administrators on demand",
+          "Quarterly recalibration and a dedicated manager",
+          "Annual contract with agreed service level"
+        ],
+        "note": "Are you a public administration? We offer an annual contract adapted to the procurement procedure of your body."
+      }
+    },
+    "credit": {
+      "title": "What a credit is",
+      "body": "Each plan includes a monthly pool of credits. Each active watcher uses a fixed share, and the rest is split between reports, versions in other languages and the assistant, depending on what you need. If you run short, you can buy more at any time. Daily reading of your sources never stops."
+    },
+    "addons": {
+      "title": "Add-ons",
+      "items": [
+        { "name": "100 credits", "price": "{149}, valid for twelve months" },
+        { "name": "500 credits", "price": "{649}, valid for twelve months" },
+        { "name": "New watcher onboarding", "price": "{290}" },
+        { "name": "25 extra readers", "price": "{39} per month" },
+        { "name": "One extra administrator", "price": "{19} per month" },
+        { "name": "Distribution readers", "price": "100 for {99} per month · 500 for {399} per month" },
+        { "name": "Configuration consulting", "price": "{90} per hour · 4 hours for {320}" },
+        { "name": "Analyst-audited report", "price": "{290} per report" }
+      ],
+      "fineprint": "Taxes not included. Guarantee and credit conditions are detailed in the service terms."
+    }
+  }
+}

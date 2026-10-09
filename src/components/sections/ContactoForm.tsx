@@ -14,11 +14,11 @@
  */
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import { enviarMensajeContacto } from "@/lib/contacto";
 import { revealConfirmation } from "@/lib/scroll";
-import { contact } from "@/content/pages";
+import { Link } from "@/i18n/routing";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -37,10 +37,10 @@ const inputErr = "border-red-500 focus:border-red-500 focus:ring-red-500/30";
 const errorText = "mt-1 text-sm text-red-600";
 const labelCls = "block text-sm font-bold text-fg";
 
-function RequiredMark() {
+function RequiredMark({ children }: { children: string }) {
   return (
     <span className="ml-1 font-normal text-fg/60" aria-hidden="true">
-      (obligatorio)
+      {children}
     </span>
   );
 }
@@ -57,9 +57,16 @@ type FormErrors = {
   submit?: string;
 };
 
+type ReasonOption = { value: string; label: string };
+
 // ── Componente ─────────────────────────────────────────────────────────────
 
 export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
+  const t = useTranslations("Contact");
+  const tCommon = useTranslations("Common");
+
+  const reasons = t.raw("reasons") as ReasonOption[];
+
   const [motivo, setMotivo] = useState(defaultMotivo ?? "");
   const isPulse = motivo === "pulse";
   const [errors, setErrors] = useState<FormErrors>({});
@@ -86,16 +93,16 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
   function validate(): FormErrors {
     const e: FormErrors = {};
 
-    if (!nombreRef.current?.value.trim()) e.nombre = contact.errors.required;
-    if (!orgRef.current?.value.trim()) e.organizacion = contact.errors.required;
+    if (!nombreRef.current?.value.trim()) e.nombre = t("errors.required");
+    if (!orgRef.current?.value.trim()) e.organizacion = t("errors.required");
 
     const correoVal = correoRef.current?.value ?? "";
-    if (!correoVal.trim()) e.correo = contact.errors.required;
-    else if (!isValidEmail(correoVal)) e.correo = contact.errors.email;
+    if (!correoVal.trim()) e.correo = t("errors.required");
+    else if (!isValidEmail(correoVal)) e.correo = t("errors.email");
 
-    if (!motivoRef.current?.value) e.motivo = contact.errors.required;
-    if (!isPulse && !mensajeRef.current?.value.trim()) e.mensaje = contact.errors.required;
-    if (!privacyRef.current?.checked) e.acepta_privacidad = contact.errors.privacy;
+    if (!motivoRef.current?.value) e.motivo = t("errors.required");
+    if (!isPulse && !mensajeRef.current?.value.trim()) e.mensaje = t("errors.required");
+    if (!privacyRef.current?.checked) e.acepta_privacidad = t("errors.privacy");
 
     return e;
   }
@@ -137,10 +144,10 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
       if (result.ok) {
         setSent(true);
       } else {
-        setErrors({ submit: contact.errorFallback });
+        setErrors({ submit: t("errorFallback") });
       }
     } catch {
-      setErrors({ submit: contact.errorFallback });
+      setErrors({ submit: t("errorFallback") });
     } finally {
       setSending(false);
     }
@@ -160,10 +167,10 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
           tabIndex={-1}
           className="text-2xl font-bold text-fg outline-none"
         >
-          {contact.confirmation.title}
+          {t("confirmation.title")}
         </p>
         <p className="mt-2 text-[1.0625rem] leading-relaxed text-fg/80">
-          {isPulse ? contact.confirmation.textPulse : contact.confirmation.text}
+          {isPulse ? t("confirmation.textPulse") : t("confirmation.text")}
         </p>
       </div>
     );
@@ -181,8 +188,8 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
       {/* Nombre */}
       <div>
         <label htmlFor="ct-nombre" className={labelCls}>
-          {contact.fields.nombre}
-          <RequiredMark />
+          {t("fields.nombre")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <input
           ref={nombreRef}
@@ -204,8 +211,8 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
       {/* Organización */}
       <div>
         <label htmlFor="ct-org" className={labelCls}>
-          {contact.fields.organizacion}
-          <RequiredMark />
+          {t("fields.organizacion")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <input
           ref={orgRef}
@@ -227,8 +234,8 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
       {/* Correo */}
       <div>
         <label htmlFor="ct-correo" className={labelCls}>
-          {contact.fields.correo}
-          <RequiredMark />
+          {t("fields.correo")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <input
           ref={correoRef}
@@ -250,8 +257,8 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
       {/* Motivo */}
       <div>
         <label htmlFor="ct-motivo" className={labelCls}>
-          {contact.fields.motivo}
-          <RequiredMark />
+          {t("fields.motivo")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <select
           ref={motivoRef}
@@ -264,9 +271,9 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
           className={cn(inputBase, errors.motivo && inputErr)}
         >
           <option value="" disabled>
-            Seleccione una opción
+            {tCommon("selectOption")}
           </option>
-          {contact.reasons.map((r) => (
+          {reasons.map((r) => (
             <option key={r.value} value={r.value}>
               {r.label}
             </option>
@@ -282,12 +289,12 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
       {/* Mensaje */}
       <div>
         <label htmlFor="ct-mensaje" className={labelCls}>
-          {contact.fields.mensaje}
-          {!isPulse && <RequiredMark />}
+          {t("fields.mensaje")}
+          {!isPulse && <RequiredMark>{tCommon("requiredMark")}</RequiredMark>}
         </label>
         {isPulse && (
           <p id="ct-mensaje-help" className="mt-1 text-sm text-fg/60">
-            {contact.mensajePulseHelp}
+            {t("mensajePulseHelp")}
           </p>
         )}
         <textarea
@@ -324,16 +331,16 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
             className="cursor-pointer text-sm leading-relaxed text-fg"
           >
             <span id="ct-privacidad-label">
-              {contact.consent.privacyPrefix}
+              {t("consent.privacyPrefix")}
               <Link
-                href={contact.consent.privacyLinkHref}
+                href={t("consent.privacyLinkHref")}
                 className="underline hover:text-accent"
                 onClick={(ev) => ev.stopPropagation()}
               >
-                {contact.consent.privacyLinkText}
+                {t("consent.privacyLinkText")}
               </Link>
-              {contact.consent.privacySuffix}{" "}
-              <span className="font-semibold">(obligatorio)</span>
+              {t("consent.privacySuffix")}{" "}
+              <span className="font-semibold">{tCommon("requiredMark")}</span>
             </span>
           </label>
         </div>
@@ -362,7 +369,7 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
           htmlFor="ct-comunicaciones"
           className="cursor-pointer text-sm leading-relaxed text-fg"
         >
-          {contact.consent.communications}
+          {t("consent.communications")}
         </label>
       </div>
 
@@ -385,7 +392,7 @@ export function ContactoForm({ defaultMotivo }: { defaultMotivo?: string }) {
           "disabled:cursor-not-allowed disabled:opacity-60",
         )}
       >
-        {sending ? contact.submitting : `${contact.submit} →`}
+        {sending ? t("submitting") : `${t("submit")} →`}
       </button>
     </form>
   );

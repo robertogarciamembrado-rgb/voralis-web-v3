@@ -2,12 +2,14 @@
 
 import { useState, type ReactNode } from "react";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
-import { formatMoney, pricing, type Currency } from "@/content/pricing";
+import { routes } from "@/content/site";
 
 type Billing = "monthly" | "annual";
+type Currency = "EUR" | "USD";
 
 /** Convierte `**negrita**` del copy en <strong>. */
 function rich(text: string): ReactNode {
@@ -19,6 +21,13 @@ function rich(text: string): ReactNode {
     ) : (
       part
     ),
+  );
+}
+
+/** Sustituye cada `{cifra}` por el importe con el símbolo de la moneda elegida. */
+function formatMoney(template: string, currency: Currency): string {
+  return template.replace(/\{([\d.,]+)\}/g, (_, amount: string) =>
+    currency === "EUR" ? `${amount} €` : `$${amount}`,
   );
 }
 
@@ -70,40 +79,70 @@ function FeatureList({ items }: { items: readonly string[] }) {
   );
 }
 
+type Plan = {
+  name: string;
+  price?: string;
+  audience: string;
+  features: string[];
+  badge?: string;
+  monthly?: { amount: string; unit: string };
+  annual?: { amount: string; unit: string };
+  fineprint?: string;
+  priceObj?: { prefix: string; amount: string; unit: string };
+  note?: string;
+};
+
 /**
  * 6 · PLANES — se monta solo si NEXT_PUBLIC_SHOW_PRICING está activo (page.tsx).
  * Isla de cliente: únicamente gestiona los selectores EUR / USD y Mensual / Anual.
  */
 export function Pricing() {
+  const t = useTranslations("Pricing");
+  const tActions = useTranslations("Actions");
+
+  const explorer = t.raw("plans.explorer") as Plan;
+  const professional = t.raw("plans.professional") as Plan;
+  const observatory = t.raw("plans.observatory") as Plan;
+  const credit = t.raw("credit") as { title: string; body: string };
+  const addons = t.raw("addons") as {
+    title: string;
+    items: Array<{ name: string; price: string }>;
+    fineprint: string;
+  };
+
   const [currency, setCurrency] = useState<Currency>("EUR");
   const [billing, setBilling] = useState<Billing>("monthly");
 
-  const { explorer, professional, observatory } = pricing.plans;
   const money = (template: string) => formatMoney(template, currency);
-  const pro = billing === "monthly" ? professional.monthly : professional.annual;
-  const { selectors } = pricing;
+  const pro = billing === "monthly" ? professional.monthly! : professional.annual!;
+  const billingLabel = t("selectors.billing.label");
+  const billingOptions = [
+    { value: "monthly" as const, label: t("selectors.billing.monthly") },
+    { value: "annual" as const, label: t("selectors.billing.annual") },
+  ];
+  const currencyOptions = [
+    { value: "EUR" as const, label: "EUR" },
+    { value: "USD" as const, label: "USD" },
+  ];
 
   return (
-    <Section id={pricing.id} labelledBy="planes-title">
-      <SectionHeading id="planes-title">{pricing.headline}</SectionHeading>
+    <Section id="planes" labelledBy="planes-title">
+      <SectionHeading id="planes-title">{t("headline")}</SectionHeading>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
         <Segmented
-          label={selectors.billing.label}
+          label={billingLabel}
           value={billing}
           onChange={setBilling}
-          options={[
-            { value: "monthly", label: selectors.billing.monthly },
-            { value: "annual", label: selectors.billing.annual },
-          ]}
+          options={billingOptions}
         />
         <Segmented
-          label={selectors.currency.label}
+          label={t("selectors.currency.label")}
           value={currency}
           onChange={setCurrency}
-          options={selectors.currency.options.map((c) => ({ value: c, label: c }))}
+          options={currencyOptions}
         />
-        <p className="text-xs text-muted">El selector Mensual / Anual afecta solo al plan Profesional.</p>
+        <p className="text-xs text-muted">{t("monthlyAnnualHint")}</p>
       </div>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-3">
@@ -114,8 +153,8 @@ export function Pricing() {
           <p className="mt-3 text-[0.9375rem] italic leading-relaxed text-muted">{explorer.audience}</p>
           <FeatureList items={explorer.features} />
           <div className="mt-auto pt-8">
-            <Button href={explorer.cta.href} variant="secondary">
-              {explorer.cta.label}
+            <Button href={routes.demo} variant="secondary">
+              {tActions("viewDemo")}
             </Button>
           </div>
         </article>
@@ -136,10 +175,12 @@ export function Pricing() {
           </p>
           <p className="mt-3 text-[0.9375rem] italic leading-relaxed text-muted">{professional.audience}</p>
           <FeatureList items={professional.features} />
-          <p className="mt-6 text-xs leading-relaxed text-muted">{money(professional.fineprint)}</p>
+          {professional.fineprint ? (
+            <p className="mt-6 text-xs leading-relaxed text-muted">{money(professional.fineprint)}</p>
+          ) : null}
           <div className="mt-auto pt-8">
-            <Button href={professional.cta.href} trailingArrow>
-              {professional.cta.label}
+            <Button href={routes.solicitarAlta} trailingArrow>
+              {tActions("requestOnboarding")}
             </Button>
           </div>
         </article>
@@ -147,19 +188,23 @@ export function Pricing() {
         {/* ---- Observatorio ----------------------------------------- */}
         <article className="card-surface flex h-full flex-col p-7 sm:p-8">
           <h3 className="text-xl font-bold tracking-[-0.03em] text-fg">{observatory.name}</h3>
-          <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
-            <span className="text-base font-bold text-muted">{observatory.price.prefix}</span>
-            <span className="tabular text-3xl font-extrabold tracking-[-0.045em] text-fg">
-              {money(`{${observatory.price.amount}}`)}
-            </span>
-            <span className="text-base font-bold text-muted">{observatory.price.unit}</span>
-          </p>
+          {observatory.priceObj ? (
+            <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
+              <span className="text-base font-bold text-muted">{observatory.priceObj.prefix}</span>
+              <span className="tabular text-3xl font-extrabold tracking-[-0.045em] text-fg">
+                {money(`{${observatory.priceObj.amount}}`)}
+              </span>
+              <span className="text-base font-bold text-muted">{observatory.priceObj.unit}</span>
+            </p>
+          ) : null}
           <p className="mt-3 text-[0.9375rem] italic leading-relaxed text-muted">{observatory.audience}</p>
           <FeatureList items={observatory.features} />
-          <p className="mt-6 text-sm leading-relaxed text-fg-soft">{observatory.note}</p>
+          {observatory.note ? (
+            <p className="mt-6 text-sm leading-relaxed text-fg-soft">{observatory.note}</p>
+          ) : null}
           <div className="mt-auto pt-8">
-            <Button href={observatory.cta.href} variant="secondary">
-              {observatory.cta.label}
+            <Button href={routes.contacto} variant="secondary">
+              {tActions("contactSales")}
             </Button>
           </div>
         </article>
@@ -167,17 +212,17 @@ export function Pricing() {
 
       {/* ---- Qué es un crédito ---------------------------------------- */}
       <div className="mt-4 rounded-card border border-line bg-sunken p-7 sm:p-8">
-        <h3 className="text-lg font-bold tracking-[-0.03em] text-fg">{pricing.credit.title}</h3>
+        <h3 className="text-lg font-bold tracking-[-0.03em] text-fg">{credit.title}</h3>
         <p className="mt-2 max-w-[48rem] text-[0.9375rem] leading-relaxed text-muted">
-          {pricing.credit.body}
+          {credit.body}
         </p>
       </div>
 
       {/* ---- Complementos --------------------------------------------- */}
       <div className="mt-12">
-        <h3 className="text-xl font-bold tracking-[-0.03em] text-fg">{pricing.addons.title}</h3>
+        <h3 className="text-xl font-bold tracking-[-0.03em] text-fg">{addons.title}</h3>
         <dl className="mt-5 divide-y divide-line rounded-card border border-line bg-raised">
-          {pricing.addons.items.map((item) => (
+          {addons.items.map((item) => (
             <div
               key={item.name}
               className="flex flex-col gap-1 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
@@ -187,7 +232,7 @@ export function Pricing() {
             </div>
           ))}
         </dl>
-        <p className="mt-4 text-xs leading-relaxed text-muted">{pricing.addons.fineprint}</p>
+        <p className="mt-4 text-xs leading-relaxed text-muted">{addons.fineprint}</p>
       </div>
     </Section>
   );

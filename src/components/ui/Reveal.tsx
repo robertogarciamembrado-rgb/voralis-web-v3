@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -17,6 +18,18 @@ import type { ReactNode } from "react";
  *
  * `once` dispara una sola vez: una landing que reanima al volver a subir se
  * siente inquieta, no viva.
+ *
+ * ─── Hidratación ──────────────────────────────────────────────────────────
+ * `useReducedMotion()` de framer-motion 13 devuelve `null` en el servidor,
+ * pero en el cliente puede devolver `true` o `false` durante la hidratación
+ * (la consulta a `matchMedia` es síncrona). Si renderizáramos un `<div>`
+ * plano en el cliente y un `motion.div` con `data-reveal=""` y estilos
+ * inline en el servidor, React detecta el desajuste y avisa en consola.
+ *
+ * Para que el primer render del cliente coincida con el del servidor,
+ * gating la decisión de saltar la animación con un `mounted` que solo se
+ * vuelve `true` tras el primer `useEffect`. Hasta entonces siempre se
+ * renderiza el componente de motion, igual que en SSR.
  */
 export function Reveal({
   children,
@@ -29,10 +42,18 @@ export function Reveal({
   className?: string;
   as?: "div" | "li";
 }) {
+  const [mounted, setMounted] = useState(false);
   const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const Tag = as === "li" ? motion.li : motion.div;
 
-  if (reduceMotion) {
+  // Tras montar: si el usuario tiene `prefers-reduced-motion: reduce`,
+  // renderizamos el elemento plano para evitar la animación.
+  if (mounted && reduceMotion === true) {
     return as === "li" ? (
       <li className={className}>{children}</li>
     ) : (

@@ -13,12 +13,12 @@
  */
 
 import { useState, useRef, useEffect, type FormEvent } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import { enviarSolicitudAlta } from "@/lib/solicitar-alta";
 import { isValidWebUrl, normalizeUrl } from "@/lib/url";
 import { revealConfirmation } from "@/lib/scroll";
-import { signup } from "@/content/pages";
+import { Link } from "@/i18n/routing";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -37,10 +37,10 @@ const inputErr = "border-red-500 focus:border-red-500 focus:ring-red-500/30";
 const errorText = "mt-1 text-sm text-red-600";
 const labelCls = "block text-sm font-bold text-fg";
 
-function RequiredMark() {
+function RequiredMark({ children }: { children: string }) {
   return (
     <span className="ml-1 font-normal text-fg/60" aria-hidden="true">
-      (obligatorio)
+      {children}
     </span>
   );
 }
@@ -60,11 +60,21 @@ type FormErrors = {
 
 // ── Componente ──────────────────────────────────────────────────────────────
 
+type TipoOption = { value: string; label: string };
+
 export function SolicitudAltaForm({
   plan,
 }: {
   plan?: "profesional" | "observatorio";
 }) {
+  const t = useTranslations("Signup");
+  const tCommon = useTranslations("Common");
+
+  const tiposOrganizacion = t.raw("tiposOrganizacion") as TipoOption[];
+  /* `t.raw` para acceder al número en lugar de pasar la clave a `t`, que
+     espera strings y falla con INVALID_MESSAGE al recibir un valor no-string. */
+  const prioridadesMaxLength = (t.raw("fields.prioridades") as { maxLength: number }).maxLength;
+
   const [competidores, setCompetidores] = useState<string[]>([""]);
   const [prioridades, setPrioridades] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
@@ -95,23 +105,23 @@ export function SolicitudAltaForm({
     const e: FormErrors = {};
 
     const webVal = webRef.current?.value ?? "";
-    if (!webVal.trim()) e.web = signup.errors.required;
-    else if (!isValidWebUrl(webVal)) e.web = signup.errors.url;
+    if (!webVal.trim()) e.web = t("errors.required");
+    else if (!isValidWebUrl(webVal)) e.web = t("errors.url");
 
-    if (!tipoRef.current?.value) e.tipo = signup.errors.required;
-    if (!nombreRef.current?.value.trim()) e.nombre = signup.errors.required;
-    if (!cargoRef.current?.value.trim()) e.cargo = signup.errors.required;
+    if (!tipoRef.current?.value) e.tipo = t("errors.required");
+    if (!nombreRef.current?.value.trim()) e.nombre = t("errors.required");
+    if (!cargoRef.current?.value.trim()) e.cargo = t("errors.required");
 
     const correoVal = correoRef.current?.value ?? "";
-    if (!correoVal.trim()) e.correo = signup.errors.required;
-    else if (!isValidEmail(correoVal)) e.correo = signup.errors.email;
+    if (!correoVal.trim()) e.correo = t("errors.required");
+    else if (!isValidEmail(correoVal)) e.correo = t("errors.email");
 
     const compErrors = competidores.map((c) =>
-      c.trim() && !isValidWebUrl(c) ? signup.errors.url : undefined,
+      c.trim() && !isValidWebUrl(c) ? t("errors.url") : undefined,
     );
     if (compErrors.some(Boolean)) e.competidores = compErrors;
 
-    if (!privacyRef.current?.checked) e.acepta_privacidad = signup.errors.privacy;
+    if (!privacyRef.current?.checked) e.acepta_privacidad = t("errors.privacy");
 
     return e;
   }
@@ -163,10 +173,10 @@ export function SolicitudAltaForm({
       if (result.ok) {
         setSent(true);
       } else {
-        setErrors({ submit: signup.errorFallback });
+        setErrors({ submit: t("errorFallback") });
       }
     } catch {
-      setErrors({ submit: signup.errorFallback });
+      setErrors({ submit: t("errorFallback") });
     } finally {
       setSending(false);
     }
@@ -186,10 +196,10 @@ export function SolicitudAltaForm({
           tabIndex={-1}
           className="text-2xl font-bold text-fg outline-none"
         >
-          {signup.confirmation.title}
+          {t("confirmation.title")}
         </p>
         <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg/80">
-          {signup.confirmation.text}
+          {t("confirmation.text")}
         </p>
       </div>
     );
@@ -210,11 +220,11 @@ export function SolicitudAltaForm({
       {/* 1. Web */}
       <div>
         <label htmlFor="alta-web" className={labelCls}>
-          {signup.fields.web.label}
-          <RequiredMark />
+          {t("fields.web.label")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <p id="alta-web-help" className="mt-1 text-sm text-fg/60">
-          {signup.fields.web.help}
+          {t("fields.web.help")}
         </p>
         <input
           ref={webRef}
@@ -237,8 +247,8 @@ export function SolicitudAltaForm({
       {/* 2. Tipo de organización */}
       <div>
         <label htmlFor="alta-tipo" className={labelCls}>
-          {signup.fields.tipo.label}
-          <RequiredMark />
+          {t("fields.tipo.label")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <select
           ref={tipoRef}
@@ -250,11 +260,11 @@ export function SolicitudAltaForm({
           className={cn(inputBase, errors.tipo && inputErr)}
         >
           <option value="" disabled>
-            Seleccione una opción
+            {tCommon("selectOption")}
           </option>
-          {signup.tiposOrganizacion.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
+          {tiposOrganizacion.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
             </option>
           ))}
         </select>
@@ -268,8 +278,8 @@ export function SolicitudAltaForm({
       {/* 3. Nombre y apellidos */}
       <div>
         <label htmlFor="alta-nombre" className={labelCls}>
-          {signup.fields.nombre.label}
-          <RequiredMark />
+          {t("fields.nombre.label")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <input
           ref={nombreRef}
@@ -291,8 +301,8 @@ export function SolicitudAltaForm({
       {/* 4. Cargo */}
       <div>
         <label htmlFor="alta-cargo" className={labelCls}>
-          {signup.fields.cargo.label}
-          <RequiredMark />
+          {t("fields.cargo.label")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <input
           ref={cargoRef}
@@ -314,8 +324,8 @@ export function SolicitudAltaForm({
       {/* 5. Correo electrónico */}
       <div>
         <label htmlFor="alta-correo" className={labelCls}>
-          {signup.fields.correo.label}
-          <RequiredMark />
+          {t("fields.correo.label")}
+          <RequiredMark>{tCommon("requiredMark")}</RequiredMark>
         </label>
         <input
           ref={correoRef}
@@ -337,7 +347,7 @@ export function SolicitudAltaForm({
       {/* 6. Teléfono (opcional) */}
       <div>
         <label htmlFor="alta-telefono" className={labelCls}>
-          {signup.fields.telefono.label}
+          {t("fields.telefono.label")}
         </label>
         <input
           ref={telefonoRef}
@@ -352,16 +362,16 @@ export function SolicitudAltaForm({
       {/* 7. Competidores o referentes (hasta 3, opcionales) */}
       <fieldset>
         <legend className={cn(labelCls, "mb-1")}>
-          {signup.fields.competidores.label}
+          {t("fields.competidores.label")}
         </legend>
         <p id="alta-comp-help" className="mb-3 text-sm text-fg/60">
-          {signup.fields.competidores.help}
+          {t("fields.competidores.help")}
         </p>
         <div className="flex flex-col gap-3">
           {competidores.map((val, i) => (
             <div key={i}>
               <label htmlFor={`alta-comp-${i}`} className="sr-only">
-                {signup.fields.competidores.label} {i + 1}
+                {t("fields.competidores.label")} {i + 1}
               </label>
               <input
                 ref={(el) => {
@@ -402,7 +412,7 @@ export function SolicitudAltaForm({
             onClick={() => setCompetidores([...competidores, ""])}
             className="mt-3 text-sm font-semibold text-accent hover:text-accent-hover"
           >
-            + {signup.fields.competidores.addButton}
+            + {t("fields.competidores.addButton")}
           </button>
         )}
       </fieldset>
@@ -410,13 +420,13 @@ export function SolicitudAltaForm({
       {/* 8. Prioridades (opcional, máx. 500 caracteres) */}
       <div>
         <label htmlFor="alta-prioridades" className={labelCls}>
-          {signup.fields.prioridades.label}
+          {t("fields.prioridades.label")}
         </label>
         <textarea
           id="alta-prioridades"
           name="prioridades"
           rows={3}
-          maxLength={signup.fields.prioridades.maxLength}
+          maxLength={prioridadesMaxLength}
           value={prioridades}
           onChange={(ev) => setPrioridades(ev.target.value)}
           aria-describedby="alta-prioridades-counter"
@@ -427,7 +437,7 @@ export function SolicitudAltaForm({
           className="mt-1 text-right text-xs text-fg/50"
           aria-live="polite"
         >
-          {prioridades.length} / {signup.fields.prioridades.maxLength}
+          {prioridades.length} / {prioridadesMaxLength}
         </p>
       </div>
 
@@ -449,16 +459,16 @@ export function SolicitudAltaForm({
             className="cursor-pointer text-sm leading-relaxed text-fg"
           >
             <span id="alta-privacidad-label">
-              {signup.consent.privacyPrefix}
+              {t("consent.privacyPrefix")}
               <Link
-                href={signup.consent.privacyLinkHref}
+                href={t("consent.privacyLinkHref")}
                 className="underline hover:text-accent"
                 onClick={(ev) => ev.stopPropagation()}
               >
-                {signup.consent.privacyLinkText}
+                {t("consent.privacyLinkText")}
               </Link>
-              {signup.consent.privacySuffix}{" "}
-              <span className="font-semibold">(obligatorio)</span>
+              {t("consent.privacySuffix")}{" "}
+              <span className="font-semibold">{tCommon("requiredMark")}</span>
             </span>
           </label>
         </div>
@@ -487,7 +497,7 @@ export function SolicitudAltaForm({
           htmlFor="alta-comunicaciones"
           className="cursor-pointer text-sm leading-relaxed text-fg"
         >
-          {signup.consent.communications}
+          {t("consent.communications")}
         </label>
       </div>
 
@@ -511,9 +521,20 @@ export function SolicitudAltaForm({
             "disabled:cursor-not-allowed disabled:opacity-60",
           )}
         >
-          {sending ? signup.submitting : `${signup.submit} →`}
+          {sending ? t("submitting") : `${t("submit")} →`}
         </button>
-        <p className="mt-3 text-sm text-fg/60">{signup.note}</p>
+        <p className="mt-3 text-sm text-fg/60">{t("note")}</p>
+        <p className="mt-5 text-sm text-fg/60">
+          {t("existingAccount.prompt")}{" "}
+          <a
+            href={t("existingAccount.href")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-accent underline-offset-2 hover:text-accent-hover hover:underline"
+          >
+            {t("existingAccount.linkLabel")}
+          </a>
+        </p>
       </div>
     </form>
   );

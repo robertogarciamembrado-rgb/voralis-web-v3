@@ -33,20 +33,26 @@ function roundedShares(values: readonly number[]): number[] {
  * Visual del hero (brief §7): réplica del RADAR ESTRATÉGICO, la pantalla de
  * entrada real del producto.
  *
- * Reproduce lo que define la especificación funcional: cabecera con selector
- * temporal e indicador de frescura, cuatro KPIs ejecutivos con la
- * nomenclatura ya aprobada, actividad informativa a 30 días, impacto medio del
- * periodo y reparto de impacto. No muestra variaciones porcentuales.
+ * **Siempre en español.** Este componente reproduce el dashboard real del
+ * cliente Tourism & Society Think Tank como demo: nombres de secciones,
+ * niveles de impacto y labels de KPIs son parte del producto del cliente,
+ * no chrome traducible de la web. Cambiar el locale de la web (a `/en`)
+ * NO traduce este panel, igual que no traduce el logo del cliente dentro
+ * del panel.
  *
- * Decisiones de diseño:
+ * Decisiones:
  * - Superficie oscura en los dos temas: representa una pantalla de producto,
  *   no un bloque de la web. Si se aclarase en tema claro perdería esa lectura.
  * - Server Component sin estado: todo el movimiento es CSS y el hero no envía
  *   JavaScript al navegador.
  * - Border beam en el marco: es la única pieza de la página que recibe el
  *   trazo animado, porque es donde debe caer la mirada al entrar.
+ *
+ * Datos del cliente (`heroDashboard` en `@/content/home`): textos fijos en
+ * español (nombre del cliente, navegación interna del producto, fecha de
+ * exportación, etiquetas de actividad, sectores en tendencia, reparto de
+ * impacto). El resto del hero SÍ se traduce vía `messages/{locale}.json`.
  */
-
 export function IntelligenceDashboard({ className }: { className?: string }) {
   const d = heroDashboard;
   const impactTotal = d.impactMix.reduce((sum, item) => sum + item.value, 0);
@@ -102,7 +108,7 @@ export function IntelligenceDashboard({ className }: { className?: string }) {
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3">
               {/* Selector temporal de la especificación funcional §6 */}
-              <div className="flex items-center gap-1 rounded-lg bg-white/[0.06] p-0.5">
+              <div className="flex flex-wrap items-center gap-1 rounded-lg bg-white/[0.06] p-0.5">
                 {d.navigation.map((item, index) => (
                   <span
                     key={item}

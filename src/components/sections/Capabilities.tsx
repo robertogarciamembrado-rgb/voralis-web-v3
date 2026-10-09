@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
-import { capabilities } from "@/content/home";
 
 /**
  * 3 · PARA QUÉ Y PARA QUIÉN
@@ -14,24 +14,55 @@ import { capabilities } from "@/content/home";
  * Pulse, que llega próximamente. Debajo, la fila «Para quién»: cada etiqueta
  * enlaza a su bloque en /soluciones.
  */
-export function Capabilities() {
-  const { audience } = capabilities;
+
+type Capability = {
+  id: string;
+  title: string;
+  body: string;
+  badge?: string;
+};
+
+type AudienceItem = { slug: string; label: string };
+
+const capabilityIcons: Record<string, IconName> = {
+  "inteligencia-mercado": "trending",
+  "vigilancia-sectorial": "radar",
+  alertas: "bell",
+  informes: "filetext",
+  reputacion: "megaphone",
+};
+
+const capabilitySpan: Record<string, "feature" | "normal" | "muted"> = {
+  "inteligencia-mercado": "feature",
+  "vigilancia-sectorial": "normal",
+  alertas: "normal",
+  informes: "normal",
+  reputacion: "muted",
+};
+
+export async function Capabilities() {
+  const t = await getTranslations("Capabilities");
+  const items = (await t.raw("items")) as Capability[];
+  const audienceTitle = t("audience.title");
+  const audienceLine = t("audience.line");
+  const audienceItems = (await t.raw("audience.items")) as AudienceItem[];
 
   return (
-    <Section id={capabilities.id} labelledBy="capacidades-title">
+    <Section id="para-quien" labelledBy="capacidades-title">
       <Reveal>
-        <Eyebrow>{capabilities.eyebrow}</Eyebrow>
-        <SectionHeading id="capacidades-title">{capabilities.headline}</SectionHeading>
+        <Eyebrow>{t("eyebrow")}</Eyebrow>
+        <SectionHeading id="capacidades-title">{t("headline")}</SectionHeading>
       </Reveal>
 
       <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {capabilities.items.map((item, index) => {
-          const isFeature = item.span === "feature";
-          const isMuted = item.span === "muted";
+        {items.map((item, index) => {
+          const span = capabilitySpan[item.id] ?? "normal";
+          const isFeature = span === "feature";
+          const isMuted = span === "muted";
 
           return (
             <Reveal
-              key={item.title}
+              key={item.id}
               as="li"
               delay={Math.min(index, 3) * 0.07}
               className={cn(
@@ -47,7 +78,7 @@ export function Capabilities() {
                 )}
               >
                 <Icon
-                  name={item.icon as IconName}
+                  name={capabilityIcons[item.id] ?? "trending"}
                   className={isFeature ? "size-[1.35rem]" : "size-[1.15rem]"}
                 />
               </span>
@@ -63,7 +94,7 @@ export function Capabilities() {
               <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-muted">{item.body}</p>
 
               <p className="mt-auto pt-6 text-[0.6875rem] font-bold uppercase tracking-[0.09em] text-muted">
-                {"footer" in item ? item.footer : item.badge}
+                {item.badge ?? t("footerWithVigilante")}
               </p>
             </Reveal>
           );
@@ -74,13 +105,13 @@ export function Capabilities() {
       <Reveal>
         <div className="mt-14 border-t border-line pt-10">
           <h3 className="text-[0.6875rem] font-extrabold uppercase tracking-[0.12em] text-accent">
-            {audience.title}
+            {audienceTitle}
           </h3>
           <ul className="mt-5 flex flex-wrap gap-2.5">
-            {audience.items.map((entry) => (
+            {audienceItems.map((entry) => (
               <li key={entry.slug}>
                 <Link
-                  href={`/soluciones#${entry.slug}`}
+                  href={{ pathname: "/soluciones", hash: entry.slug }}
                   className="inline-flex rounded-full border border-line bg-raised px-4 py-2 text-sm font-semibold text-fg-soft transition-colors duration-300 hover:border-accent hover:bg-accent-soft hover:text-accent"
                 >
                   {entry.label}
@@ -89,7 +120,7 @@ export function Capabilities() {
             ))}
           </ul>
           <p className="mt-6 max-w-[46rem] text-pretty text-[0.9375rem] leading-relaxed text-muted">
-            {audience.line}
+            {audienceLine}
           </p>
         </div>
       </Reveal>

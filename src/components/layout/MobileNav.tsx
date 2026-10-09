@@ -1,17 +1,27 @@
 "use client";
 
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useId, useState } from "react";
 import { CLOSE_MENU_EVENT } from "@/components/ui/HomeLink";
-import { nav } from "@/content/site";
+import { Link } from "@/i18n/routing";
 
 /**
  * Isla de cliente del header. El resto de la navegación es Server Component:
  * mantener el `use client` en la hoja evita arrastrar el layout entero al
  * bundle del navegador.
  */
-export function MobileNav() {
+type NavItem = { label: string; href: string };
+
+export function MobileNav({
+  items,
+  ctaLabel,
+}: {
+  items: NavItem[];
+  ctaLabel: string;
+}) {
+  const t = useTranslations("Common");
+  const tNav = useTranslations("Nav");
   const [open, setOpen] = useState(false);
   const panelId = useId();
 
@@ -47,7 +57,7 @@ export function MobileNav() {
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label={open ? "Cerrar menú" : "Abrir menú"}
+        aria-label={open ? t("closeMenu") : t("openMenu")}
         className="grid size-9 place-items-center rounded-xl border border-line text-fg-soft transition-colors duration-300 hover:bg-accent-soft hover:text-accent"
       >
         {open ? (
@@ -62,9 +72,9 @@ export function MobileNav() {
           id={panelId}
           className="absolute inset-x-0 top-full mt-2 origin-top animate-rise rounded-card border border-line bg-raised p-3 shadow-panel"
         >
-          <nav aria-label="Navegación principal (móvil)">
+          <nav aria-label={tNav("mainMobileAriaLabel")}>
             <ul className="flex flex-col">
-              {nav.items.map((item) => (
+              {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -78,11 +88,11 @@ export function MobileNav() {
             </ul>
           </nav>
           <Link
-            href={nav.cta.href}
+            href="/solicitar-alta"
             onClick={() => setOpen(false)}
             className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-3 text-sm font-extrabold text-white"
           >
-            {nav.cta.label}
+            {ctaLabel}
             <span aria-hidden="true">→</span>
           </Link>
         </div>

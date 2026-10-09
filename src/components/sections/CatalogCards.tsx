@@ -1,22 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import { catalog } from "@/content/pages";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 
-type Network = (typeof catalog.networks)[number];
+type Network = {
+  id: string;
+  name: string;
+  mark: string;
+  color: string;
+  report: string;
+  watches: string;
+  audience: string;
+  summary: string;
+  languages: string;
+  status: string;
+  cta: string;
+  available: boolean;
+  href: { es: string; en: string };
+};
 
 /**
  * Tres tarjetas iguales, una por red, con banda de color y distintivo
  * «Disponible» / «Próximamente». Cualquier botón abre antes el aviso de salida.
+ *
+ * El `href` de cada red está localizado por idioma; este componente lee el
+ * locale activo de `useLocale()` (mismo atributo que gestiona
+ * `LanguageToggle` desde el header) y elige la URL correspondiente.
  */
 export function CatalogCards() {
+  const t = useTranslations("Catalog");
+  const tCommon = useTranslations("Common");
+  const locale = useLocale() as "es" | "en";
   const [pending, setPending] = useState<Network | null>(null);
+
+  const networks = t.raw("networks") as Network[];
 
   return (
     <>
       <ul className="grid gap-4 lg:grid-cols-3">
-        {catalog.networks.map((n) => (
+        {networks.map((n) => (
           <li
             key={n.id}
             className="card-surface flex h-full flex-col overflow-hidden"
@@ -36,7 +59,7 @@ export function CatalogCards() {
                     n.available ? "bg-signal/15 text-signal-deep" : "bg-sunken text-muted",
                   )}
                 >
-                  {n.available ? catalog.badges.available : catalog.badges.soon}
+                  {n.available ? tCommon("available") : tCommon("soon")}
                 </span>
               </div>
 
@@ -45,15 +68,21 @@ export function CatalogCards() {
 
               <dl className="mt-5 flex flex-col gap-3 text-sm leading-relaxed text-muted">
                 <div>
-                  <dt className="text-[0.625rem] font-bold uppercase tracking-[0.09em]">Qué vigila</dt>
+                  <dt className="text-[0.625rem] font-bold uppercase tracking-[0.09em]">
+                    {t("watchesLabel")}
+                  </dt>
                   <dd className="mt-0.5">{n.watches}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.625rem] font-bold uppercase tracking-[0.09em]">Para quién</dt>
+                  <dt className="text-[0.625rem] font-bold uppercase tracking-[0.09em]">
+                    {t("audienceLabel")}
+                  </dt>
                   <dd className="mt-0.5">{n.audience}</dd>
                 </div>
                 <div>
-                  <dt className="text-[0.625rem] font-bold uppercase tracking-[0.09em]">Ficha</dt>
+                  <dt className="text-[0.625rem] font-bold uppercase tracking-[0.09em]">
+                    {t("summaryLabel")}
+                  </dt>
                   <dd className="mt-0.5">
                     {n.summary} · {n.languages}
                   </dd>
@@ -62,14 +91,15 @@ export function CatalogCards() {
 
               <p className="mt-5 text-sm font-semibold text-fg">{n.status}</p>
 
-              <button
-                type="button"
-                onClick={() => setPending(n)}
-                className="mt-auto inline-flex items-center justify-center gap-2 self-start rounded-xl bg-accent px-[1.125rem] py-[0.6875rem] text-sm font-bold text-white shadow-brand transition-colors duration-300 hover:bg-accent-hover"
-                style={{ marginTop: "1.5rem" }}
-              >
-                {n.cta} <span aria-hidden="true">↗</span>
-              </button>
+              <div className="mt-auto">
+                <button
+                  type="button"
+                  onClick={() => setPending(n)}
+                  className="mt-6 inline-flex items-center justify-center gap-2 self-start rounded-xl bg-accent px-[1.125rem] py-[0.6875rem] text-sm font-bold text-white shadow-brand transition-colors duration-300 hover:bg-accent-hover"
+                >
+                  {n.cta} <span aria-hidden="true">↗</span>
+                </button>
+              </div>
             </div>
           </li>
         ))}
@@ -85,25 +115,25 @@ export function CatalogCards() {
         >
           <div className="w-full max-w-md rounded-card border border-line bg-raised p-7 shadow-panel">
             <p id="exit-notice" className="text-[0.9375rem] leading-relaxed text-fg">
-              {catalog.exitNotice(pending.name)}
+              {t("exitNotice", { network: pending.name })}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href={pending.href}
+                href={pending.href[locale]}
                 target="_blank"
                 rel="noopener noreferrer"
                 autoFocus
                 onClick={() => setPending(null)}
                 className="inline-flex rounded-xl bg-accent px-[1.125rem] py-[0.6875rem] text-sm font-bold text-white hover:bg-accent-hover"
               >
-                {catalog.exitActions.continue}
+                {t("exitActions.continue")}
               </a>
               <button
                 type="button"
                 onClick={() => setPending(null)}
                 className="inline-flex rounded-xl border border-line px-[1.125rem] py-[0.6875rem] text-sm font-bold text-fg hover:border-accent hover:text-accent"
               >
-                {catalog.exitActions.cancel}
+                {t("exitActions.cancel")}
               </button>
             </div>
           </div>
