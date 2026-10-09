@@ -1,8 +1,8 @@
+import { getTranslations } from "next-intl/server";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { DataKindBadge } from "@/components/ui/DataKindBadge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
-import { impact } from "@/content/home";
 
 /**
  * BLOQUE 04 — RESULTADOS + ESTIMACIÓN DE IMPACTO (brief §10)
@@ -12,14 +12,20 @@ import { impact } from "@/content/home";
  * con la fórmula visible: la transparencia del cálculo es lo que hace creíble
  * la cifra mientras no exista histórico consolidado.
  */
-export function Impact() {
-  const e = impact.headlineEstimate;
+
+type Metric = { id: string; label: string; kind: "real" | "estimate"; value: string };
+type Estimate = { value: string; unit: string; claim: string; formula: string };
+
+export async function Impact() {
+  const t = await getTranslations("Impact");
+  const metrics = (await t.raw("metrics")) as Metric[];
+  const estimate = (await t.raw("headlineEstimate")) as Estimate;
 
   return (
-    <Section id={impact.id} tone="sunken" labelledBy="resultados-title">
+    <Section id="resultados" tone="sunken" labelledBy="resultados-title">
       <Reveal>
-        <Eyebrow>{impact.eyebrow}</Eyebrow>
-        <SectionHeading id="resultados-title">{impact.headline}</SectionHeading>
+        <Eyebrow>{t("eyebrow")}</Eyebrow>
+        <SectionHeading id="resultados-title">{t("headline")}</SectionHeading>
       </Reveal>
 
       <div className="mt-12 grid gap-4 lg:grid-cols-[1.05fr_1fr]">
@@ -30,24 +36,24 @@ export function Impact() {
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-32 -right-24 size-80 rounded-full border border-brand-300/20 shadow-[0_0_0_2.5rem_rgba(161,215,255,0.05)]"
             />
-            <DataKindBadge kind={e.kind} tone="onPanel" />
+            <DataKindBadge kind="estimate" tone="onPanel" />
 
             <p className="relative mt-6 flex flex-wrap items-baseline gap-x-3">
               <span className="tabular text-[clamp(3rem,7vw,4.5rem)] font-extrabold leading-none tracking-[-0.055em]">
-                {e.value}
+                {estimate.value}
               </span>
-              <span className="text-lg font-bold text-panel-muted">{e.unit}</span>
+              <span className="text-lg font-bold text-panel-muted">{estimate.unit}</span>
             </p>
             <p className="relative mt-3 max-w-sm text-pretty text-lg font-semibold text-white/90">
-              {e.claim}
+              {estimate.claim}
             </p>
 
             <div className="relative mt-7 rounded-xl border border-white/12 bg-white/[0.05] p-4">
               <p className="text-[0.625rem] font-bold uppercase tracking-[0.09em] text-panel-muted">
-                Cómo se calcula
+                {t("howItIsCalculated")}
               </p>
               <p className="tabular mt-1.5 text-[0.9375rem] font-semibold text-white/90">
-                {e.formula}
+                {estimate.formula}
               </p>
             </div>
           </div>
@@ -55,9 +61,9 @@ export function Impact() {
 
         {/* ---- Métricas de apoyo ------------------------------------- */}
         <ul className="grid gap-3 sm:grid-cols-2">
-          {impact.metrics.map((metric, index) => (
+          {metrics.map((metric, index) => (
             <Reveal
-              key={metric.label}
+              key={metric.id}
               as="li"
               delay={Math.min(index, 4) * 0.06}
               className="card-surface flex flex-col p-5 sm:p-6"

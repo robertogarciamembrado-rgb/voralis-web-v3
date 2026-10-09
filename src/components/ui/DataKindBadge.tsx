@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 
 /**
@@ -9,12 +10,6 @@ import { cn } from "@/lib/cn";
  */
 export type DataKind = "real" | "estimate" | "target";
 
-const labels: Record<DataKind, string> = {
-  real: "Dato real",
-  estimate: "Estimación",
-  target: "Objetivo de diseño",
-};
-
 export function DataKindBadge({
   kind,
   tone = "onSurface",
@@ -24,6 +19,7 @@ export function DataKindBadge({
   tone?: "onSurface" | "onPanel";
   className?: string;
 }) {
+  const t = useTranslations("Common.dataKind");
   const styles =
     tone === "onSurface"
       ? kind === "real"
@@ -45,7 +41,7 @@ export function DataKindBadge({
         className,
       )}
     >
-      {labels[kind]}
+      {t(kind)}
     </span>
   );
 }

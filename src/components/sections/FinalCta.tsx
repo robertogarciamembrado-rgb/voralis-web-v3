@@ -1,15 +1,18 @@
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { finalCta } from "@/content/home";
 
 /**
  * 7 · LLAMADA FINAL — Solicitar alta · Ver la demo.
  */
-export function FinalCta() {
+export async function FinalCta() {
+  const t = await getTranslations("FinalCta");
+  const tActions = await getTranslations("Actions");
+
   return (
     <section
-      id={finalCta.id}
+      id="llamada-final"
       aria-labelledby="cta-title"
       className="panel-surface relative overflow-hidden py-24 sm:py-28"
     >
@@ -22,18 +25,18 @@ export function FinalCta() {
         <Reveal>
           <div className="max-w-[38rem]">
             <h2 id="cta-title" className="text-balance text-title font-bold text-white">
-              {finalCta.headline}
+              {t("headline")}
             </h2>
             <p className="mt-5 text-pretty text-lg leading-relaxed text-panel-muted">
-              {finalCta.lead}
+              {t("lead")}
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={finalCta.primaryCta.href} variant="inverse" trailingArrow>
-                {finalCta.primaryCta.label}
+              <Button href="/solicitar-alta" variant="inverse" trailingArrow>
+                {tActions("requestOnboarding")}
               </Button>
-              <Button href={finalCta.secondaryCta.href} variant="outlineInverse">
-                {finalCta.secondaryCta.label}
+              <Button href="/demo" variant="outlineInverse">
+                {tActions("viewDemo")}
               </Button>
             </div>
           </div>

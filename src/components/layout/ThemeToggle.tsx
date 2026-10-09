@@ -2,6 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type Theme = "light" | "dark";
 
@@ -19,6 +20,7 @@ const STORAGE_KEY = "voralis-theme";
  * pintado, así que aquí solo sincronizamos el estado de React.
  */
 export function ThemeToggle() {
+  const t = useTranslations("Common.theme");
   const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
@@ -48,7 +50,11 @@ export function ThemeToggle() {
       /* Hasta que monta no sabemos el tema real: sin label, el lector de
          pantalla anunciaría una acción equivocada durante un instante. */
       aria-label={
-        mounted ? (isDark ? "Cambiar a tema claro" : "Cambiar a tema oscuro") : "Cambiar tema"
+        mounted
+          ? isDark
+            ? t("changeToLight")
+            : t("changeToDark")
+          : t("changeTheme")
       }
       aria-pressed={mounted ? isDark : undefined}
       className="grid size-9 place-items-center rounded-xl border border-line text-fg-soft transition-colors duration-300 hover:bg-accent-soft hover:text-accent"

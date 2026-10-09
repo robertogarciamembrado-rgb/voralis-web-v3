@@ -1,60 +1,27 @@
 /**
- * Navegación y datos globales del sitio.
+ * Datos globales del sitio que NO son traducibles.
  *
- * Fuente: documentacion/Voralis_Textos_Landing_v2.md (secciones «Menú» y «Pie»).
- * Todo el texto trata al visitante de «usted».
- *
- * Botones de acción permitidos en toda la web (solo tres):
- *  - Solicitar alta  → /solicitar-alta
- *  - Ver la demo     → /demo
- *  - Hablar con ventas → /contacto
+ * El copy traducible (botones, nav, footer, CTAs, forms, etc.) vive en
+ * `messages/{locale}.json` y se consume vía `getTranslations` /
+ * `useTranslations` de next-intl. Aquí solo quedan:
+ *  - `SHOW_PRICING`: interruptor de la sección de planes (build-time).
+ *  - `routes`: rutas internas del sitio (referenciadas desde el código y
+ *    desde algunos hrefs de los JSON cuando se necesita una ruta dinámica).
  */
 
 /** Interruptor de la sección de planes: visible en revisión, apagado en producción. */
 export const SHOW_PRICING = process.env.NEXT_PUBLIC_SHOW_PRICING === "true";
 
-export const routes = {
+/**
+ * Rutas internas. Centralizadas aquí (no en el JSON de i18n) porque son
+ * valores de routing, no copy visible. Los hrefs en los componentes se
+ * escriben directamente con estos strings o se interpolan en `messages/*.json`
+ * cuando se necesite una etiqueta dinámica.
+ */
+export const routes: { readonly [k: string]: string } = {
   solicitarAlta: "/solicitar-alta",
   demo: "/demo",
   contacto: "/contacto",
-} as const;
-
-export const actions = {
-  solicitarAlta: { label: "Solicitar alta", href: routes.solicitarAlta },
-  verDemo: { label: "Ver la demo", href: routes.demo },
-  hablarVentas: { label: "Hablar con ventas", href: routes.contacto },
-} as const;
-
-/* Anclas con «/» inicial para que funcionen también desde las páginas secundarias. */
-const navItems = [
-  { label: "Qué es Voralis", href: "/#que-es" },
-  { label: "Para quién", href: "/#para-quien" },
-  { label: "Resultados", href: "/#resultados" },
-  { label: "Cómo funciona", href: "/#como-funciona" },
-  /* «Planes» solo aparece si el interruptor de precios está activo. */
-  ...(SHOW_PRICING ? [{ label: "Planes", href: "/#planes" }] : []),
-  { label: "Catálogo", href: "/catalogo" },
-] as const;
-
-export const nav = {
-  items: navItems,
-  cta: actions.solicitarAlta,
-} as const;
-
-/** Razón social: pendiente de que la indique administración. */
-const legalEntity = "GJC";
-
-export const footer = {
-  tagline:
-    "Voralis convierte la información de su entorno en inteligencia para decidir mejor.",
-  /* Enlaces legales (texto provisional en /legal/* hasta que Diana cierre los textos con eDefense). */
-  links: [
-    { label: "Aviso legal", href: "/legal/aviso-legal" },
-    { label: "Privacidad", href: "/legal/privacidad" },
-    { label: "Condiciones", href: "/legal/condiciones" },
-    { label: "Uso de IA", href: "/legal/uso-de-ia" },
-    { label: "Cookies", href: "/legal/cookies" },
-    { label: "Contacto", href: routes.contacto },
-  ],
-  copyright: `© ${legalEntity} · Voralis es una marca bajo licencia de ${legalEntity}`,
-} as const;
+  catalogo: "/catalogo",
+  soluciones: "/soluciones",
+};

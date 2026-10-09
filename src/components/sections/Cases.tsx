@@ -1,47 +1,52 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { cases } from "@/content/home";
+import { Button } from "@/components/ui/Button";
+import { CatalogCarousel } from "./CatalogCarousel";
 
 /**
- * Caso (parte de la sección 4): Tourism & Society Think Tank.
- * Franja compacta bajo las métricas; el detalle vive en /catalogo.
+ * Casos (parte de la sección 4): carrusel de las redes del catálogo.
+ *
+ * El CTA único de la sección apunta a /catalogo: las tarjetas del carrusel
+ * no llevan su propio botón a propósito, para concentrar el tráfico en la
+ * página que muestra el catálogo completo con detalle por red.
  */
-export function Cases() {
+export async function Cases() {
+  const t = await getTranslations("Cases");
+  const tCommon = await getTranslations("Common");
+
   return (
     <section
-      id={cases.id}
+      id="casos"
       aria-labelledby="casos-title"
       className="border-t border-line bg-surface py-16 sm:py-20"
     >
       <Container>
         <Reveal>
-          <article className="card-surface rounded-[var(--radius-panel)] p-7 sm:p-9">
+          <header className="mx-auto max-w-3xl text-center">
             <p className="text-[0.6875rem] font-extrabold uppercase tracking-[0.12em] text-accent">
-              Caso
+              {t("eyebrow")}
             </p>
-            <h3
+            <h2
               id="casos-title"
-              className="mt-3 text-pretty text-2xl font-bold tracking-[-0.04em] text-fg"
+              className="mt-3 text-pretty text-title font-bold tracking-[-0.04em] text-fg"
             >
-              {cases.client}
-            </h3>
-            <p className="mt-4 max-w-[46rem] text-pretty text-[0.9375rem] leading-relaxed text-muted">
-              {cases.body}
+              {t("headline")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-[42rem] text-pretty text-[0.9375rem] leading-relaxed text-muted sm:text-base">
+              {t("lead")}
             </p>
-            <Link
-              href={cases.cta.href}
-              className="group mt-6 inline-flex items-center gap-2 text-[0.9375rem] font-extrabold text-accent transition-colors duration-300 hover:text-accent-hover"
-            >
-              {cases.cta.label}
-              <ArrowRight
-                aria-hidden="true"
-                className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
-                strokeWidth={2.5}
-              />
-            </Link>
-          </article>
+          </header>
+        </Reveal>
+
+        <Reveal className="mt-10 sm:mt-12">
+          <CatalogCarousel />
+        </Reveal>
+
+        <Reveal className="mt-10 flex justify-center">
+          <Button href="/catalogo" trailingArrow>
+            {tCommon("viewCatalog")}
+          </Button>
         </Reveal>
       </Container>
     </section>

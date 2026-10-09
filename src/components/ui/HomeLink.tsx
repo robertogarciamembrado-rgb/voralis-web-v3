@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import type { MouseEvent, ReactNode } from "react";
 import { scrollBehavior } from "@/lib/scroll";
@@ -15,6 +16,7 @@ export const CLOSE_MENU_EVENT = "voralis:close-menu";
  * titular. Desde otra página navega a `/`, que abre arriba, en el hero.
  */
 export function HomeLink({ className, children }: { className?: string; children: ReactNode }) {
+  const t = useTranslations("Common");
   const pathname = usePathname();
 
   function onClick(ev: MouseEvent<HTMLAnchorElement>) {
@@ -29,7 +31,7 @@ export function HomeLink({ className, children }: { className?: string; children
   }
 
   return (
-    <Link href="/" onClick={onClick} className={className} aria-label="Voralis — Inicio">
+    <Link href="/" onClick={onClick} className={className} aria-label={t("homeLinkAriaLabel")}>
       {children}
     </Link>
   );
